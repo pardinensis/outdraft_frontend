@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HeroService } from './hero.service';
+import { Bracket } from './hero';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.heroService.getHero("Crystal Maiden").then(hero => {
-      console.log(hero);
+      console.log(hero.name + " has a " + (hero.rankedWinRates[Bracket.Ancient] * 100) + "% win rate in the ancient bracket.");
     });
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Hero, Attribute } from '../app/hero';
+import { callLifecycleHooksChildrenFirst } from '@angular/core/src/view/provider';
 
 
 @Injectable()
@@ -30,11 +31,26 @@ export class HeroService {
     for (let i = 0; i < 100000000; ++i);
 
     this.heroes = [];
-    this.addHero(new Hero(1, "Anti-Mage", Attribute.Agility));
-    this.addHero(new Hero(2, "Axe", Attribute.Strength));
-    this.addHero(new Hero(3, "Bane", Attribute.Intelligence));
-    this.addHero(new Hero(4, "Bloodseeker", Attribute.Agility));
-    this.addHero(new Hero(5, "Crystal Maiden", Attribute.Intelligence));
+
+    let antiMage = new Hero(1, "Anti-Mage", Attribute.Agility);
+    antiMage.setRankedWinRates([0.45, 0.45, 0.48, 0.48, 0.48]);
+    this.addHero(antiMage);
+
+    let axe = new Hero(2, "Axe", Attribute.Strength);
+    axe.setRankedWinRates([0.53, 0.52, 0.52, 0.51, 0.51]);
+    this.addHero(axe);
+
+    let bane = new Hero(3, "Bane", Attribute.Intelligence);
+    bane.setRankedWinRates([0.49, 0.51, 0.51, 0.53, 0.54]);
+    this.addHero(bane);
+
+    let bloodseeker = new Hero(4, "Bloodseeker", Attribute.Agility);
+    bloodseeker.setRankedWinRates([0.52, 0.53, 0.51, 0.51, 0.49]);
+    this.addHero(bloodseeker);
+
+    let crystalMaiden = new Hero(5, "Crystal Maiden", Attribute.Intelligence);
+    crystalMaiden.setRankedWinRates([0.56, 0.54, 0.53, 0.51, 0.50]);
+    this.addHero(crystalMaiden);
 
     this.heroesAvailable = true;
     console.log("finished gathering");
