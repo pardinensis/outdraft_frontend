@@ -8,7 +8,11 @@ import { Hero } from '../hero'
   styleUrls: ['./hero-image.component.css']
 })
 export class HeroImageComponent implements OnInit {
-  constructor() { }
+  @Input() hero: Hero;
+
+  constructor() {
+    
+  }
 
   ngOnInit() {
   }
