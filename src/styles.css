@@ -22,11 +22,11 @@ body {
   font-size: large;
  }
 
-li {
+.navigationbaritem li {
   float: left;
 }
 
-li a, .dropbtn {
+.navigationbaritem a, .dropbtn{
   display: inline-block;
   color: white;
   text-align: center;
@@ -34,7 +34,9 @@ li a, .dropbtn {
   text-decoration: none;
 }
 
-li a:hover, .dropdown:hover .dropbtn {
+
+.navigationbaritem a:hover{
   background-color: red;
 }
+
 
