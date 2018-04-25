@@ -1,11 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-  --palette_background: #27272F;
-  --palette_navigation_bar: #111111;
-  --palette_foreground: #FFFFFF;
-  --palette_highlight_dark: #4461CB;
-  --palette_highlight_light: #7491FF;
+  --palette_white: #FFFFFF;
+  --palette_black: #111111;
+  --palette_dark_gray: #27272F;
+  --palette_dark_blue: #2941BB;
+  --palette_light_blue: #5971FF;
+  --palette_dark_red: #BB4129;
+  --palette_light_red: #FF7159;
+  --palette_dark_green: #41BB29;
+  --palette_light_green: #71FF59;
+
+  --palette_background: var(--palette_dark_gray);
+  --palette_navigation_bar: var(--palette_black);
+  --palette_foreground: var(--palette_white);
+  --palette_highlight_dark: var(--palette_dark_blue);
+  --palette_highlight_light: var(--palette_light_blue);
 }
 
 body {
