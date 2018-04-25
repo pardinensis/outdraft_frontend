@@ -22,7 +22,6 @@ body {
 }
 
 .navigationbar {
-  list-style-type: none;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -32,14 +31,20 @@ body {
 
 .navigationbaritem {
   float: left;
+  padding: 12px 24px;
+}
+
+.navigationbaritem a {
+  color: var(--palette_foreground);
+  transition: color .1s ease-in-out;
   font-weight: bolder;
   font-size: large;
   text-decoration: none;
-  padding: 12px 48px;
-  transition: color .1s ease-in-out;
- }
+  outline: 0;
+  padding: 12px 24px;
+}
 
-.navigationbaritem:hover, .dropdown:hover .dropbtn {
+.navigationbaritem a:hover {
   color: var(--palette_highlight_light);
 }
 
