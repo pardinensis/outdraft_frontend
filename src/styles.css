@@ -4,7 +4,8 @@
   --palette_background: #27272F;
   --palette_navigation_bar: #111111;
   --palette_foreground: #FFFFFF;
-  --palette_highlight: #4C74DF;
+  --palette_highlight_dark: #4461CB;
+  --palette_highlight_light: #7491FF;
 }
 
 body {
@@ -29,7 +30,6 @@ body {
   background-color: var(--palette_navigation_bar);
 }
 
-
 .navigationbaritem {
   float: left;
   font-weight: bolder;
@@ -40,5 +40,12 @@ body {
  }
 
 .navigationbaritem:hover, .dropdown:hover .dropbtn {
-  color: var(--palette_highlight);
+  color: var(--palette_highlight_light);
+}
+
+.navigationbarseparator {
+  width: 100%;
+  height: 4px;
+  margin-bottom: 10px;
+  background-color: var(--palette_highlight_dark);
 }

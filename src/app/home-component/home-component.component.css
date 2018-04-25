@@ -10,5 +10,5 @@ div.update_news_inner{
 li.newslisteitem {
   list-style: none;
   font-weight: bold;
-  color: var(--palette_highlight);
+  color: var(--palette_highlight_dark);
 }
