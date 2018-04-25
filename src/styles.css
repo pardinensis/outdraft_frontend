@@ -42,3 +42,18 @@ body {
 .navigationbaritem:hover, .dropdown:hover .dropbtn {
   color: var(--palette_highlight);
 }
+
+.navigationbaritem a{
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+
+.navigationbaritem a:hover{
+  background-color: red;
+}
+
+
