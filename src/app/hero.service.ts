@@ -35,23 +35,23 @@ export class HeroService {
 
     this.heroes = [];
 
-    let antiMage = new Hero(1, "Anti-Mage", Attribute.Agility);
+    let antiMage = new Hero(1, "Anti-Mage", "Magina, the Anti-Mage", Attribute.Agility);
     antiMage.setRankedWinRates([0.45, 0.45, 0.48, 0.48, 0.48]);
     this.addHero(antiMage);
 
-    let axe = new Hero(2, "Axe", Attribute.Strength);
+    let axe = new Hero(2, "Axe", "Mogul Khan, the Axe", Attribute.Strength);
     axe.setRankedWinRates([0.53, 0.52, 0.52, 0.51, 0.51]);
     this.addHero(axe);
 
-    let bane = new Hero(3, "Bane", Attribute.Intelligence);
+    let bane = new Hero(3, "Bane", "Atropos, the Bane", Attribute.Intelligence);
     bane.setRankedWinRates([0.49, 0.51, 0.51, 0.53, 0.54]);
     this.addHero(bane);
 
-    let bloodseeker = new Hero(4, "Bloodseeker", Attribute.Agility);
+    let bloodseeker = new Hero(4, "Bloodseeker", "Strygwyr, the Bloodseeker", Attribute.Agility);
     bloodseeker.setRankedWinRates([0.52, 0.53, 0.51, 0.51, 0.49]);
     this.addHero(bloodseeker);
 
-    let crystalMaiden = new Hero(5, "Crystal Maiden", Attribute.Intelligence);
+    let crystalMaiden = new Hero(5, "Crystal Maiden", "Rylai, the Crystal Maiden", Attribute.Intelligence);
     crystalMaiden.setRankedWinRates([0.56, 0.54, 0.53, 0.51, 0.50]);
     this.addHero(crystalMaiden);
 

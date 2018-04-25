@@ -16,14 +16,16 @@ export class Hero {
     id: number;
     name: string;
     internalName: string;
+    description: string;
     attribute: Attribute;
 
     rankedWinRates: number[];
 
-    constructor(id: number, name: string, attribute: Attribute) {
+    constructor(id: number, name: string, description: string, attribute: Attribute) {
         this.id = id;
         this.name = name;
         this.internalName = name.replace(" ","_").toLowerCase();
+        this.description = description;
         this.attribute = attribute;
     }
 
