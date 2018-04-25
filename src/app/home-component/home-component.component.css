@@ -1,22 +1,14 @@
 div.updatenewsmain{
-
-  padding-left: calc(15%) /*2cm;*/
 }
 
 div.update_news_inner{
-  position: fixed;
-  left: calc(15%);
-  right: calc(15%);
-
-  background-color: white;
+  background-color: var(--palette_foreground);
   color: black;
-
 }
 
 
 li.newslisteitem {
   list-style: none;
   font-weight: bold;
-  color: red;
-
+  color: var(--palette_highlight);
 }

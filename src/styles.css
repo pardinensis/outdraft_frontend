@@ -1,42 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --palette_background: #27272F;
+  --palette_navigation_bar: #111111;
+  --palette_foreground: #FFFFFF;
+  --palette_highlight: #4C74DF;
+}
+
 body {
-  background-color: #171F27;
-  color: white;
+  font-family: Montserrat, sans-serif;
+  background-color: var(--palette_background);
+  color: var(--palette_foreground);
+  margin: 0;
+}
+
+.container {
+  margin: 0 auto;
+  min-width: 480px;
+  max-width: 1280px;
 }
 
 .navigationbar {
   list-style-type: none;
+  width: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: var(--palette_navigation_bar);
 }
 
 
 .navigationbaritem {
-   float: left;
-   font-weight: lighter;
-   font-size: larger;
-   width: 160px;
+  float: left;
+  font-weight: bolder;
   font-size: large;
+  text-decoration: none;
+  padding: 12px 48px;
+  transition: color .1s ease-in-out;
  }
 
-.navigationbaritem li {
-  float: left;
+.navigationbaritem:hover, .dropdown:hover .dropbtn {
+  color: var(--palette_highlight);
 }
-
-.navigationbaritem a, .dropbtn{
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-
-.navigationbaritem a:hover{
-  background-color: red;
-}
-
-
