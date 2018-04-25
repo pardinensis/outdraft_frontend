@@ -2,3 +2,21 @@ div.updatenewsmain{
 
   padding-left: calc(15%) /*2cm;*/
 }
+
+div.update_news_inner{
+  position: fixed;
+  left: calc(15%);
+  right: calc(15%);
+
+  background-color: white;
+  color: black;
+
+}
+
+
+li.newslisteitem {
+  list-style: none;
+  font-weight: bold;
+  color: red;
+
+}
