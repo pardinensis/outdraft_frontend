@@ -15,7 +15,7 @@ export enum Bracket {
 export class Hero {
     id: number;
     name: string;
-    filename: string;
+    internalName: string;
     attribute: Attribute;
 
     rankedWinRates: number[];
@@ -23,7 +23,7 @@ export class Hero {
     constructor(id: number, name: string, attribute: Attribute) {
         this.id = id;
         this.name = name;
-        this.filename = name.replace(" ","_").toLowerCase();
+        this.internalName = name.replace(" ","_").toLowerCase();
         this.attribute = attribute;
     }
 

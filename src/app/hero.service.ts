@@ -10,20 +10,20 @@ export class HeroService {
   
   heroes: Hero[];
   heroesByName: { [key:string]:Hero };
-  heroesByFilename: { [key:string]:Hero };
+  heroesByInternalName: { [key:string]:Hero };
 
   constructor() {
     this.heroesAvailable = false;
 
     this.heroes = [];
     this.heroesByName = {};
-    this.heroesByFilename = {};
+    this.heroesByInternalName = {};
   }
 
   private addHero(hero: Hero): void {
     this.heroes.push(hero);
     this.heroesByName[hero.name] = hero;
-    this.heroesByFilename[hero.filename] = hero;
+    this.heroesByInternalName[hero.internalName] = hero;
   }
 
   // STUB: initialize a testing set of heroes locally and simulate network delay
@@ -77,12 +77,12 @@ export class HeroService {
     });
   }
 
-  getHeroByFilename(filename: string): Promise<Hero> {
+  getHeroByInternalName(internalName: string): Promise<Hero> {
     return new Promise(resolve => {
       if (!this.heroesAvailable) {
         this.gatherHeroes();
       }
-      resolve(this.heroesByFilename[filename]);
+      resolve(this.heroesByInternalName[internalName]);
     });
   }
 }

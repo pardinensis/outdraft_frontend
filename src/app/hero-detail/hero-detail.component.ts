@@ -20,7 +20,7 @@ export class HeroDetailComponent implements OnInit {
 
   ngOnInit() {
     const internalName = this.route.snapshot.paramMap.get('internalname');
-    this.heroService.getHeroByFilename(internalName).then(hero => {
+    this.heroService.getHeroByInternalName(internalName).then(hero => {
       this.hero = hero;
     });
   }
