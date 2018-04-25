@@ -1,0 +1,19 @@
+.box {
+    display: flex;
+    background-color: var(--palette_navigation_bar);
+    padding: 4px;
+}
+
+.box div {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+h2 {
+    font-size: xx-large;
+}
+
+p {
+    font-size: small;
+    font-weight: lighter;
+}

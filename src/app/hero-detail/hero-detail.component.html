@@ -1,6 +1,10 @@
-blub
-
 <div *ngIf="hero">
-  <h2>{{hero.name}}</h2>
-  <app-hero-image [hero]=hero></app-hero-image>
+  <div class="box">
+    <app-hero-image [hero]=hero style="height: 140px;"></app-hero-image>
+
+    <div>
+      <h2>{{hero.name}}</h2>
+      <p>{{hero.attribute}}</p>
+    </div>
+  </div>
 </div>
