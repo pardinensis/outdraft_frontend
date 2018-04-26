@@ -5,7 +5,7 @@
         <app-hero-image [hero]=hero></app-hero-image>
       </div>
 
-      <div>
+      <div style="width: 300px;">
         <h2>{{hero.name}} <img src="./assets/icons/{{hero.attribute}}.png" style="width: 28px; height: 28px;"/></h2>
         <p>{{hero.description}}</p>
       </div>
@@ -13,7 +13,7 @@
 
     <div class="box">
       <div>
-        Ranked Win Rates
+        <p style="display: flex; justify-content: center;">Ranked Win Rates</p>
         <table>
           <tr>
             <th>Cru</th>
@@ -23,14 +23,16 @@
             <th>Div</th>
           </tr>
           <tr>
-            <!-- <td colorScale winrate={{hero.rankedWinRates[0]}}></td> -->
-            <td>50.3%</td>
-            <td>50.1%</td>
-            <td>49.7%</td>
-            <td>47.2%</td>
+            <td colorScale winRate={{hero.rankedWinRates[0]}} bad=0.4 good=0.6></td>
+            <td colorScale winRate={{hero.rankedWinRates[1]}} bad=0.4 good=0.6></td>
+            <td colorScale winRate={{hero.rankedWinRates[2]}} bad=0.4 good=0.6></td>
+            <td colorScale winRate={{hero.rankedWinRates[3]}} bad=0.4 good=0.6></td>
+            <td colorScale winRate={{hero.rankedWinRates[4]}} bad=0.4 good=0.6></td>
           </tr>
         </table>
       </div>
     </div>
+    <div class="box" style="flex-grow: 100;">
+    </div>    
   </div>
 </div>

@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeroImageComponent } from './hero-image/hero-image.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { SettingsComponent } from './settings/settings.component';
+import { ColorScaleDirective } from './color-scale.directive';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { SettingsComponent } from './settings/settings.component';
     HeroDetailComponent,
     HeroImageComponent,
     HomeComponentComponent,
-    SettingsComponent
+    SettingsComponent,
+    ColorScaleDirective
   ],
   imports: [
     BrowserModule,
