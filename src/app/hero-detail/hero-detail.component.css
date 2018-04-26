@@ -15,16 +15,8 @@
     margin-right: 0;
 }
 
-.box :not(:first-child) {
-    margin-left: 20px;
-}
-
-.box :not(:first-child) * {
-    margin-left: 0;
-}
-
 td {
-    padding: 8px;
+    padding: 2px 8px;
 }
 
 
@@ -32,6 +24,9 @@ h2 {
     font-size: xx-large;
 }
 
-p {
+h4 {
     font-weight: lighter;
+    display: flex;
+    justify-content: center;
+    /* color: var(--palette_highlight_light); */
 }
