@@ -1,10 +1,36 @@
 <div *ngIf="hero">
-  <div class="box">
-    <app-hero-image [hero]=hero style="height: 140px;"></app-hero-image>
+  <div class="boxrow">
+    <div class="box">
+      <div style="height: 140px;">
+        <app-hero-image [hero]=hero></app-hero-image>
+      </div>
 
-    <div>
-      <h2>{{hero.name}} <img src="./assets/icons/{{hero.attribute}}.png" style="width: 28px; height: 28px;"/></h2>
-      <p>{{hero.description}}</p>
+      <div>
+        <h2>{{hero.name}} <img src="./assets/icons/{{hero.attribute}}.png" style="width: 28px; height: 28px;"/></h2>
+        <p>{{hero.description}}</p>
+      </div>
+    </div>
+
+    <div class="box">
+      <div>
+        Ranked Win Rates
+        <table>
+          <tr>
+            <th>Cru</th>
+            <th>Arc</th>
+            <th>Leg</th>
+            <th>Anc</th>
+            <th>Div</th>
+          </tr>
+          <tr>
+            <!-- <td colorScale winrate={{hero.rankedWinRates[0]}}></td> -->
+            <td>50.3%</td>
+            <td>50.1%</td>
+            <td>49.7%</td>
+            <td>47.2%</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>
