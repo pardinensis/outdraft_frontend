@@ -14,7 +14,6 @@ export class ColorScaleDirective {
   }
 
   ngOnInit() {
-    let percentage = Math.round(this.winRate * 10000) / 100;
     let alpha = Math.max(0, Math.min(1, (this.winRate - this.bad) / (this.good - this.bad)));
 		let red, green, blue;
 		if (alpha < 0.5) {
@@ -28,7 +27,7 @@ export class ColorScaleDirective {
 			blue = red;
 		}
 
-    this.element.nativeElement.innerText = percentage + "%";
+    this.element.nativeElement.innerText = (this.winRate * 100).toFixed(1) + "%";
     this.element.nativeElement.style.color = "rgb(" + Math.floor(red) + ", " + Math.floor(green) + ", " + Math.floor(blue) + ")";
  }
 }
