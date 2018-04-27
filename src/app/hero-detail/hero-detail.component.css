@@ -3,25 +3,34 @@
 }
 
 .box {
+    display: block;
     background-color: var(--palette_navigation_bar);
     padding: 4px;
     margin: 4px;
     flex-grow: 1;
 }
 
-.box div {
-    float: left;
+.chart {
+    display: inline-block;
     margin-left: 0;
     margin-right: 0;
 }
 
-#herooverviewbox {
-    width: 480px;
+.heroimage {
+    width: 400px;
 }
 
-.heroimage {
-    height: 140px;
-    padding-right: 20px;
+.heroimage img {
+    display: block;
+    padding: 2px;
+    margin-top: 8px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.heroname {
+    text-align: center;
 }
 
 .attributeicon {

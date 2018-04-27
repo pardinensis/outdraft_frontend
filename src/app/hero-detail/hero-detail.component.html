@@ -2,20 +2,20 @@
   <div class="boxrow">
     <div class="box" id="herooverviewbox">
       <div class="heroimage">
-        <app-hero-image [hero]=hero></app-hero-image>
+        <img src="./assets/images/horizontal/{{hero.internalName}}.png"/>
       </div>
-
-      <div>
-        <h2>{{hero.name}} <img src="./assets/icons/{{hero.attribute}}.png" class="attributeicon"/></h2>
-        <p>{{hero.description}}</p>
+      <div class="heroname">
+        <h2>{{hero.name}}
+          <img src="./assets/icons/{{hero.attribute}}.png" class="attributeicon"/>
+        </h2>
       </div>
     </div>
 
     <div class="box">
-      <div id="rankedwinratechart"></div>
+      <div class="chart" id="rankedwinratechart"></div>
     </div>
     <div class="box">
-      <div id="farmprioritychart"></div>
+      <div class="chart" id="farmprioritychart"></div>
     </div>    
   </div>
 </div>
