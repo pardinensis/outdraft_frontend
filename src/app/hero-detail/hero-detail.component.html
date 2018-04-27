@@ -1,12 +1,12 @@
 <div *ngIf="hero">
   <div class="boxrow">
-    <div class="box">
-      <div style="height: 140px; padding-right: 20px;">
+    <div class="box" id="herooverviewbox">
+      <div class="heroimage">
         <app-hero-image [hero]=hero></app-hero-image>
       </div>
 
-      <div style="width: 300px;">
-        <h2>{{hero.name}} <img src="./assets/icons/{{hero.attribute}}.png" style="width: 28px; height: 28px;"/></h2>
+      <div>
+        <h2>{{hero.name}} <img src="./assets/icons/{{hero.attribute}}.png" class="attributeicon"/></h2>
         <p>{{hero.description}}</p>
       </div>
     </div>
@@ -16,11 +16,11 @@
         <h4>Ranked Win Rates</h4>
         <table>
           <tr>
-            <th><img src="./assets/icons/rank_crusader.png" style="width: 40px; height: 40px;"/></th>
-            <th><img src="./assets/icons/rank_archon.png" style="width: 40px; height: 40px;"/></th>
-            <th><img src="./assets/icons/rank_legend.png" style="width: 40px; height: 40px;"/></th>
-            <th><img src="./assets/icons/rank_ancient.png" style="width: 40px; height: 40px;"/></th>
-            <th><img src="./assets/icons/rank_divine.png" style="width: 40px; height: 40px;"/></th>
+            <th><img src="./assets/icons/rank_crusader.png" class="rankicon"/></th>
+            <th><img src="./assets/icons/rank_archon.png" class="rankicon"/></th>
+            <th><img src="./assets/icons/rank_legend.png" class="rankicon"/></th>
+            <th><img src="./assets/icons/rank_ancient.png" class="rankicon"/></th>
+            <th><img src="./assets/icons/rank_divine.png" class="rankicon"/></th>
           </tr>
           <tr>
             <td colorScale winRate={{hero.rankedWinRates[0]}} bad=0.4 good=0.6></td>
