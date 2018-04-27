@@ -20,6 +20,7 @@ export class Hero {
     attribute: Attribute;
 
     rankedWinRates: number[];
+    farmPriorityWinRates: number[];
 
     constructor(id: number, name: string, description: string, attribute: Attribute) {
         this.id = id;
@@ -31,5 +32,9 @@ export class Hero {
 
     setRankedWinRates(winRates: number[]): void {
         this.rankedWinRates = winRates;
+    }
+
+    setFarmPriorityWinRates(winRates: number[]): void {
+        this.farmPriorityWinRates = winRates;
     }
 }

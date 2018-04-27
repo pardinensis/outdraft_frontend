@@ -9,6 +9,8 @@ import { HeroImageComponent } from './hero-image/hero-image.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ColorScaleDirective } from './color-scale.directive';
+import { ChartService } from './chart.service';
+import { ColorScaleService } from './color-scale.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,7 @@ import { ColorScaleDirective } from './color-scale.directive';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [HeroService],
+  providers: [HeroService, ChartService, ColorScaleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

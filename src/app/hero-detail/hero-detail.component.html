@@ -12,27 +12,10 @@
     </div>
 
     <div class="box">
-      <div>
-        <h4>Ranked Win Rates</h4>
-        <table>
-          <tr>
-            <th><img src="./assets/icons/rank_crusader.png" class="rankicon"/></th>
-            <th><img src="./assets/icons/rank_archon.png" class="rankicon"/></th>
-            <th><img src="./assets/icons/rank_legend.png" class="rankicon"/></th>
-            <th><img src="./assets/icons/rank_ancient.png" class="rankicon"/></th>
-            <th><img src="./assets/icons/rank_divine.png" class="rankicon"/></th>
-          </tr>
-          <tr>
-            <td colorScale winRate={{hero.rankedWinRates[0]}} bad=0.4 good=0.6></td>
-            <td colorScale winRate={{hero.rankedWinRates[1]}} bad=0.4 good=0.6></td>
-            <td colorScale winRate={{hero.rankedWinRates[2]}} bad=0.4 good=0.6></td>
-            <td colorScale winRate={{hero.rankedWinRates[3]}} bad=0.4 good=0.6></td>
-            <td colorScale winRate={{hero.rankedWinRates[4]}} bad=0.4 good=0.6></td>
-          </tr>
-        </table>
-      </div>
+      <div id="rankedwinratechart"></div>
     </div>
-    <div class="box" style="flex-grow: 100;">
+    <div class="box">
+      <div id="farmprioritychart"></div>
     </div>    
   </div>
 </div>
