@@ -9,10 +9,14 @@ export class ChartService {
   constructor(
     private colorScaleService: ColorScaleService
   ) {
-    google.charts.load('current', {'packages':['corechart', 'line', 'bar']});
+    if (typeof(google) !== "undefined") {
+      google.charts.load('current', {'packages':['corechart', 'line', 'bar']});
+    }
   }
 
   public buildWinRateChart(elementId: string, title: string, labels: string[], winRates: number[]) {
+    if (typeof(google) === "undefined") return;
+
     var paletteBackground = window.getComputedStyle(document.documentElement).getPropertyValue("--palette_background").trim();
     var paletteForeground = window.getComputedStyle(document.documentElement).getPropertyValue("--palette_foreground").trim();
     

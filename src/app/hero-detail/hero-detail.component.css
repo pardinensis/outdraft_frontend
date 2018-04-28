@@ -17,7 +17,7 @@
 }
 
 .heroimage {
-    width: 400px;
+    min-width: 400px;
 }
 
 .heroimage img {

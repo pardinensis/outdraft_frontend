@@ -6,8 +6,6 @@ import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 import { ChartService } from '../chart.service';
 
-declare var google: any;
-
 @Component({
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
