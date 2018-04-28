@@ -9,7 +9,7 @@ export class ChartService {
   constructor(
     private colorScaleService: ColorScaleService
   ) {
-    google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', {'packages':['corechart', 'line', 'bar']});
   }
 
   public buildWinRateChart(elementId: string, title: string, labels: string[], winRates: number[]) {
@@ -17,23 +17,25 @@ export class ChartService {
     var paletteForeground = window.getComputedStyle(document.documentElement).getPropertyValue("--palette_foreground").trim();
     
     var options = {
-      title: title,
-      titleTextStyle: {
-        color: paletteForeground,
-      },
       legend: 'none',
       backgroundColor: 'transparent',
       chartArea: {
         left: "30",
         width: "100%",
+        height: "80%",
       },
       vAxis: {
         format: 'percent',
         gridlines: {
-          color: paletteBackground
+          color: paletteBackground,
         },
         textStyle: {
           color: paletteForeground,
+        },
+        viewWindowMode: "explicit",
+        viewWindow: {
+          min: 0.4,
+          max: 0.6,
         },
       },
       hAxis: {
@@ -43,19 +45,34 @@ export class ChartService {
         maxAlternation: 1,
         slantedText: false,
         showTextEvery: 1,
-      }
+      },
+      tooltip: {
+        trigger: 'none',
+      },
+      annotations: {
+        alwaysOutside: true,
+        textStyle: {
+          fontSize: 14,
+        },
+      },
     }
-    var data = [
-      ["Farm Priority", "Win Rate", { role: 'style' }],
-      [labels[0], winRates[0], this.colorScaleService.calcColor(winRates[0], 0.4, 0.6)],
-      [labels[1], winRates[1], this.colorScaleService.calcColor(winRates[1], 0.4, 0.6)],
-      [labels[2], winRates[2], this.colorScaleService.calcColor(winRates[2], 0.4, 0.6)],
-      [labels[3], winRates[3], this.colorScaleService.calcColor(winRates[3], 0.4, 0.6)],
-      [labels[4], winRates[4], this.colorScaleService.calcColor(winRates[4], 0.4, 0.6)]
-    ];
 
     google.charts.setOnLoadCallback(() => {
-      var datatable = google.visualization.arrayToDataTable(data);
+      var datatable = new google.visualization.DataTable();
+      datatable.addColumn("string", title);
+      datatable.addColumn("number", "Win Rate");
+      datatable.addColumn({"type": "string", "role": "style" });
+      datatable.addColumn({"type": "number", "role": "annotation" });
+      for (var i = 0; i < 5; ++i) {
+        var tooltip = '<div>' + labels[i] + '</div>';
+        datatable.addRow([labels[i], Math.max(0.399, Math.min(0.601, winRates[i])), this.colorScaleService.calcColor(winRates[i], 0.4, 0.6), winRates[i]]);
+      }
+      
+      var formatter = new google.visualization.NumberFormat({
+        pattern: '##.#%'
+      });
+      formatter.format(datatable, 3);
+
       var container = document.getElementById(elementId);
       var chart = new google.visualization.ColumnChart(container);
       chart.draw(datatable, options);

@@ -52,9 +52,6 @@ h2 {
     font-size: xx-large;
 }
 
-h4 {
-    font-weight: lighter;
-    display: flex;
-    justify-content: center;
-    margin: 10px;
+p {
+    text-align: center;
 }

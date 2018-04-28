@@ -26,8 +26,8 @@ export class HeroDetailComponent implements OnInit {
     const internalName = this.route.snapshot.paramMap.get('internalname');
     this.heroService.getHeroByInternalName(internalName).then(hero => {
       this.hero = hero;
-      this.chartService.buildWinRateChart("rankedwinratechart", "Rank", ["Crusader", "Archon", "Legend", "Ancient", "Divine"], this.hero.rankedWinRates);
-      this.chartService.buildWinRateChart("farmprioritychart", "Farm Priority (Position)", ["1", "2", "3", "4", "5"], this.hero.farmPriorityWinRates);
+      this.chartService.buildWinRateChart("rankedwinratechart", "Rank", ["\u2264 2K", "2K-3K", "3K-4K", "4K-5K", "> 5K"], this.hero.rankedWinRates);
+      this.chartService.buildWinRateChart("farmprioritychart", "Farm Priority", ["1", "2", "3", "4", "5"], this.hero.farmPriorityWinRates);
       });
   }
 }
