@@ -35,6 +35,7 @@ export class ChartService {
         },
         textStyle: {
           color: paletteForeground,
+          fontSize: 12,
         },
         viewWindowMode: "explicit",
         viewWindow: {
@@ -45,6 +46,7 @@ export class ChartService {
       hAxis: {
         textStyle: {
           color: paletteForeground,
+          fontSize: 12,
         },
         maxAlternation: 1,
         slantedText: false,
