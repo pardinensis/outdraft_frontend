@@ -30,7 +30,5 @@ export class HeroDetailComponent implements OnInit {
         this.chartService.buildWinRateChart("farmprioritychart", "Farm Priority", ["1", "2", "3", "4", "5"], this.hero.farmPriorityWinRates);
       });
     });
-
-    this.heroService.getHeroByInternalName("axe").then(hero => {});    
   }
 }
