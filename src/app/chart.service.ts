@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ColorScaleService } from './color-scale.service';
+import { HeroService } from './hero.service';
 
 declare var google: any;
 
@@ -7,7 +8,8 @@ declare var google: any;
 export class ChartService {
 
   constructor(
-    private colorScaleService: ColorScaleService
+    private colorScaleService: ColorScaleService,
+    private heroService: HeroService,
   ) {
     if (typeof(google) !== "undefined") {
       google.charts.load('current', {'packages':['corechart', 'line', 'bar']});
@@ -64,24 +66,26 @@ export class ChartService {
     }
 
     google.charts.setOnLoadCallback(() => {
-      var datatable = new google.visualization.DataTable();
-      datatable.addColumn("string", title);
-      datatable.addColumn("number", "Win Rate");
-      datatable.addColumn({"type": "string", "role": "style" });
-      datatable.addColumn({"type": "number", "role": "annotation" });
-      for (var i = 0; i < 5; ++i) {
-        var tooltip = '<div>' + labels[i] + '</div>';
-        datatable.addRow([labels[i], Math.max(0.399, Math.min(0.601, winRates[i])), this.colorScaleService.calcColor(winRates[i], 0.4, 0.6), winRates[i]]);
-      }
-      
-      var formatter = new google.visualization.NumberFormat({
-        pattern: '##.#%'
-      });
-      formatter.format(datatable, 3);
+      this.heroService.wait().then(() => {
+        var datatable = new google.visualization.DataTable();
+        datatable.addColumn("string", title);
+        datatable.addColumn("number", "Win Rate");
+        datatable.addColumn({"type": "string", "role": "style" });
+        datatable.addColumn({"type": "number", "role": "annotation" });
+        for (var i = 0; i < 5; ++i) {
+          var tooltip = '<div>' + labels[i] + '</div>';
+          datatable.addRow([labels[i], Math.max(0.399, Math.min(0.601, winRates[i])), this.colorScaleService.calcColor(winRates[i], 0.4, 0.6), winRates[i]]);
+        }
+        
+        var formatter = new google.visualization.NumberFormat({
+          pattern: '##.#%'
+        });
+        formatter.format(datatable, 3);
 
-      var container = document.getElementById(elementId);
-      var chart = new google.visualization.ColumnChart(container);
-      chart.draw(datatable, options);
+        var container = document.getElementById(elementId);
+        var chart = new google.visualization.ColumnChart(container);
+        chart.draw(datatable, options);
+      });
     });   
   }
 }

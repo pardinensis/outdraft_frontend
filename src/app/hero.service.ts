@@ -36,6 +36,14 @@ export class HeroService {
     this.heroesByInternalName[hero.internalName] = hero;
   }
 
+  wait(): Promise<void> {
+    return new Promise(resolve => {
+      this.heroesAvailable.then(() => {
+          resolve();
+      });
+    });
+  }
+
   getAllHeroes(): Promise<Hero[]> {
     return new Promise(resolve => {
       this.heroesAvailable.then(() => {

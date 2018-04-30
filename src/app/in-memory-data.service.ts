@@ -3,10 +3,10 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Hero, Attribute } from './hero';
 
 @Injectable()
-export class InMemoryDataService implements InMemoryDataService {
+export class InMemoryDataService implements InMemoryDbService {
 
   createDb() {
-    const heroes = [];
+    var heroes = [];
 
     let antiMage = new Hero(1, "Anti-Mage", "Magina, the Anti-Mage", Attribute.Agility);
     antiMage.setRankedWinRates([0.4479, 0.4620, 0.4762, 0.4744, 0.4742]);
