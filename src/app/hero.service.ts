@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Hero, Attribute } from '../app/hero';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { InMemoryDataService } from './in-memory-data.service';
+
 
 @Injectable()
 export class HeroService {
+  heroesFile: string = "assets/heroes.json";
   heroesAvailable: Promise<boolean>;
   
   heroes: Hero[];
@@ -13,20 +14,25 @@ export class HeroService {
   heroesByInternalName: { [key:string]:Hero };
 
   constructor(
-    private inMemoryDataService: InMemoryDataService,
     private http: HttpClient
   ) {
     this.heroes = [];
     this.heroesByName = {};
     this.heroesByInternalName = {};
 
-    this.heroesAvailable = new Promise<boolean>(resolve => {
-      this.http.get<Hero[]>("api/heroes").subscribe(heroes => {
-        for (var i = 0; i < heroes.length; ++i) {
-          this.addHero(heroes[i]);
-        }
-        resolve(true);
-      });
+    this.heroesAvailable = new Promise<boolean>(resolve => this.getHeroData(resolve));
+  }
+
+  private getHeroData(resolve) {
+    class HeroData {
+      heroes: Hero[]
+    }
+
+    this.http.get<HeroData>(this.heroesFile).subscribe(heroData => {
+      for (var i = 0; i < heroData.heroes.length; ++i) {
+        this.addHero(heroData.heroes[i]);
+      }
+      resolve(true);
     });
   }
 
@@ -55,9 +61,9 @@ export class HeroService {
   getHeroByName(name: string): Promise<Hero> {
     return new Promise(resolve => {
       this.heroesAvailable.then(() => {
+      });
         resolve(this.heroesByName[name]);
       });
-    });
   }
 
   getHeroByInternalName(internalName: string): Promise<Hero> {
