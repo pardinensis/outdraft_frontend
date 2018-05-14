@@ -24,19 +24,16 @@ export class HeroService {
   }
 
   private getHeroData(resolve) {
-    class HeroData {
-      heroes: Hero[]
-    }
-
-    this.http.get<HeroData>(this.heroesFile).subscribe(heroData => {
-      for (var i = 0; i < heroData.heroes.length; ++i) {
-        this.addHero(heroData.heroes[i]);
+    this.http.get<Hero[]>(this.heroesFile).subscribe(heroData => {
+      for (var i = 0; i < heroData.length; ++i) {
+        this.addHero(heroData[i]);
       }
       resolve(true);
     });
   }
 
   private addHero(hero: Hero): void {
+    console.log(hero.internalName);
     this.heroes.push(hero);
     this.heroesByName[hero.name] = hero;
     this.heroesByInternalName[hero.internalName] = hero;
