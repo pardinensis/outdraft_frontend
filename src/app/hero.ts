@@ -16,19 +16,16 @@ export class Hero {
     id: number;
     name: string;
     internalName: string;
-    description: string;
     attribute: Attribute;
 
+    rankedPickRates: number[];
     rankedWinRates: number[];
+    farmPrioritySamples: number[];
     farmPriorityWinRates: number[];
-
-    constructor(id: number, name: string, description: string, attribute: Attribute) {
-        this.id = id;
-        this.name = name;
-        this.internalName = name.replace(" ","_").toLowerCase();
-        this.description = description;
-        this.attribute = attribute;
-    }
+    synergySamples: number[];
+    synergyWinRates: number[];
+    matchUpSamples: number[];
+    matchUpWinRates: number[];
 
     setRankedWinRates(winRates: number[]): void {
         this.rankedWinRates = winRates;

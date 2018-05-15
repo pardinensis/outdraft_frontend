@@ -16,22 +16,30 @@ export class ChartService {
     }
   }
 
-  public buildWinRateChart(elementId: string, title: string, labels: string[], winRates: number[]) {
+  public buildWinRateChart(elementId: string, title: string, labels: string[], winRates: number[], samples: number[]) {
     if (typeof(google) === "undefined") return;
 
     var paletteBackground = window.getComputedStyle(document.documentElement).getPropertyValue("--palette_background").trim();
     var paletteForeground = window.getComputedStyle(document.documentElement).getPropertyValue("--palette_foreground").trim();
+
+    const minSamplePercentage = 0.05;
+    let totalSamples = 0;
+    if (samples != null) {
+      for (let i = 0; i < samples.length; ++i) {
+        totalSamples += samples[i];
+      }
+    }
     
     var options = {
       legend: 'none',
       backgroundColor: 'transparent',
+      enableInteractivity: false,
       chartArea: {
         left: "30",
         width: "100%",
         height: "80%",
       },
       vAxis: {
-        format: 'percent',
         gridlines: {
           color: paletteBackground,
         },
@@ -60,7 +68,7 @@ export class ChartService {
       annotations: {
         alwaysOutside: true,
         textStyle: {
-          fontSize: 14,
+          fontSize: 12,
         },
       },
     }
@@ -70,11 +78,25 @@ export class ChartService {
         var datatable = new google.visualization.DataTable();
         datatable.addColumn("string", title);
         datatable.addColumn("number", "Win Rate");
+        datatable.addColumn({"type": "string", "role": "annotation" });
         datatable.addColumn({"type": "string", "role": "style" });
-        datatable.addColumn({"type": "number", "role": "annotation" });
         for (var i = 0; i < 5; ++i) {
           var tooltip = '<div>' + labels[i] + '</div>';
-          datatable.addRow([labels[i], Math.max(0.399, Math.min(0.601, winRates[i])), this.colorScaleService.calcColor(winRates[i], 0.4, 0.6), winRates[i]]);
+          let color = this.colorScaleService.calcColor(winRates[i], 0.4, 0.6);
+          let annotationText = (winRates[i] * 100).toFixed(1) + "%";
+          let row = [
+            labels[i],
+            Math.max(0.399, Math.min(0.601, winRates[i])),
+          ];
+          if (samples != null && samples[i] < minSamplePercentage * totalSamples) {
+            row.push("(" + annotationText + ")");
+            row.push("fill-opacity: 0.05; color: " + color + "; stroke-color: " + color);
+          }
+          else {
+            row.push(annotationText);
+            row.push(color);
+          }
+          datatable.addRow(row);
         }
         
         var formatter = new google.visualization.NumberFormat({
