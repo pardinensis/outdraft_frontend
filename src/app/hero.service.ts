@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { Hero, Attribute } from '../app/hero';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
