@@ -26,11 +26,12 @@ export class HeroDetailComponent implements OnInit {
       this.hero = hero;
 
       setTimeout(() => { // wait for the DOM to finish loading
-
-        this.chartService.buildWinRateChart("rankedwinratechart", "Rank", ["\u2264 2K", "2K-3K", "3K-4K", "4K-5K", "> 5K"],
-          this.hero.rankedWinRates, null);
+        // this.chartService.buildWinRateChart("rankedwinratechart", "Rank", ["\u2264 2K", "2K-3K", "3K-4K", "4K-5K", "> 5K"],
+        //   this.hero.rankedWinRates, null);
         this.chartService.buildWinRateChart("farmprioritychart", "Farm Priority", ["1", "2", "3", "4", "5"],
-          this.hero.farmPriorityWinRates, this.hero.farmPrioritySamples);
+          this.hero.farmPriorityWinRates.reverse(), this.hero.farmPrioritySamples.reverse());
+        this.chartService.buildWinRateChart("xpprioritychart", "XP Priority", ["1", "2", "3", "4", "5"],
+          this.hero.xpPriorityWinRates.reverse(), this.hero.xpPrioritySamples.reverse());
       });
     });
   }

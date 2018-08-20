@@ -22,6 +22,8 @@ export class Hero {
     rankedWinRates: number[];
     farmPrioritySamples: number[];
     farmPriorityWinRates: number[];
+    xpPrioritySamples: number[];
+    xpPriorityWinRates: number[];
     synergySamples: number[];
     synergyWinRates: number[];
     matchUpSamples: number[];
