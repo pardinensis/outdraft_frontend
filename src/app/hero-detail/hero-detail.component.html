@@ -27,12 +27,19 @@
   <div class="boxrow">
     <div class="box">
       <p>Best With</p>
-      <div id="synergies">
+      <div class="herotable" id="synergies">
+        <div *ngFor="let hero of bestSynergies" class="herobutton">
+          <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
+        </div>
       </div>
     </div>
     <div class="box">
       <p>Best Against</p>
-      <div id="matchups"></div>
+      <div class="herotable" id="matchups">
+        <div *ngFor="let hero of bestMatchups" class="herobutton">
+          <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
+        </div>
+      </div>
     </div>
   </div>
 </div>

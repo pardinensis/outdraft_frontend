@@ -36,4 +36,11 @@ export class Hero {
     setFarmPriorityWinRates(winRates: number[]): void {
         this.farmPriorityWinRates = winRates;
     }
+
+    constructor() {
+        this.id = 0;
+        this.name = "none";
+        this.internalName = "empty";
+        this.attribute = Attribute.Strength;
+    }
 }

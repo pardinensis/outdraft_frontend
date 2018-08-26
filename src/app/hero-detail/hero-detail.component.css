@@ -43,6 +43,18 @@
     height: 48px;
 }
 
+.herobutton {
+    display: inline-flex;
+    padding: 2px;
+    border: var(--palette_dark_gray);
+    border-width: 2px;
+    border-style: solid; 
+}
+
+.herobutton img {
+    width: 64px;
+}
+
 td {
     padding: 2px 8px;
 }
