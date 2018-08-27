@@ -16,10 +16,11 @@
   --palette_dark_green: #41BB29;
   --palette_light_green: #71FF59; */
 
+  --palette_foreground: #FFFFFF;
   --palette_background: #222222;
   --palette_navigation_bar: #111111;
   --palette_card: #111111;
-  --palette_foreground: #FFFFFF;
+  --palette_dark_subtle: #333333;
   --palette_subtle: #888888;
   --palette_highlight_dark: #2941BB;
   --palette_highlight_light: #5971FF;
@@ -35,7 +36,6 @@ body {
 
 .container {
   margin: 0 auto;
-  min-width: 480px;
   max-width: 1280px;
 }
 
@@ -71,4 +71,61 @@ body {
   height: 4px;
   margin-bottom: 10px;
   background-color: var(--palette_highlight_dark);
+}
+
+
+/* cards */
+
+h3 {
+  text-align: center;
+  margin: 0;
+}
+
+.cardpage {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mat-card {
+  background: var(--palette_card);
+  margin: 4px;
+  flex-grow: 1;
+}
+
+.mat-card-subtitle {
+  color: var(--palette_subtle);
+}
+
+.hero-main-card {
+  max-width: 256px;
+  max-height: 256px;
+}
+
+.hero-chart-card {
+  max-height: 256px;
+
+}
+
+.hero-list-card {
+  min-width: 256px;
+  /* max-height: 256px; */
+}
+
+
+.herotable {
+  text-align: center;
+}
+
+.herobutton {
+  display: inline-flex;
+  padding: 1px;
+  margin: 2px;
+  border: var(--palette_dark_subtle);
+  border-width: 1px;
+  border-style: solid; 
+}
+
+.herobutton img {
+    width: 50px;
+    display: block;
 }

@@ -24,6 +24,7 @@ import { SettingsComponent } from './settings/settings.component';
 
 // modules
 import { AppRoutingModule } from './app-routing.module';
+import { HeroesComponent } from './heroes/heroes.component';
 
 
 
@@ -33,7 +34,8 @@ import { AppRoutingModule } from './app-routing.module';
     HeroDetailComponent,
     HomeComponentComponent,
     SettingsComponent,
-    ColorScaleDirective
+    ColorScaleDirective,
+    HeroesComponent
   ],
   imports: [
     BrowserModule,

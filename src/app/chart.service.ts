@@ -19,7 +19,7 @@ export class ChartService {
   public buildWinRateChart(elementId: string, title: string, labels: string[], winRates: number[], samples: number[]) {
     if (typeof(google) === "undefined") return;
 
-    var paletteBackground = window.getComputedStyle(document.documentElement).getPropertyValue("--palette_background").trim();
+    var paletteBackground = window.getComputedStyle(document.documentElement).getPropertyValue("--palette_dark_subtle").trim();
     var paletteForeground = window.getComputedStyle(document.documentElement).getPropertyValue("--palette_foreground").trim();
 
     const minSamplePercentage = 0.05;

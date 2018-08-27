@@ -16,19 +16,6 @@
     margin-right: 0;
 }
 
-.heroimage {
-    min-width: 400px;
-}
-
-.heroimage img {
-    display: block;
-    padding: 2px;
-    margin-top: 8px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
 .heroname {
     text-align: center;
 }
@@ -41,57 +28,4 @@
 .rankicon {
     width: 48px;
     height: 48px;
-}
-
-.herotable {
-    text-align: center;
-}
-
-.herobutton {
-    display: inline-flex;
-    padding: 1px;
-    margin: 2px;
-    border: var(--palette_background);
-    border-width: 1px;
-    border-style: solid; 
-}
-
-.herobutton img {
-    width: 46px;
-    display: block;
-}
-
-h3 {
-    text-align: center;
-    margin: 0;
-}
-
-.cardpage {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.mat-card {
-    background: var(--palette_card);
-    margin: 4px;
-    flex-grow: 1;
-}
-
-.mat-card-subtitle {
-    color: var(--palette_subtle);
-}
-
-.hero-main-card {
-    max-width: 256px;
-    max-height: 256px;
-}
-
-.hero-chart-card {
-    max-height: 256px;
-
-}
-
-.hero-matsyn-card {
-    min-width: 400px;
-    max-height: 256px;
 }
