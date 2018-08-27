@@ -20,18 +20,28 @@ export class ColorScaleService {
 
   public calcColor(value: number, bad: number, good: number) {
     let alpha = Math.max(0, Math.min(1, (value - bad) / (good - bad)));
-		let red, green, blue;
-		if (alpha < 0.5) {
-			red = 255;
-			green = 2 * alpha * 255;
-			blue = green;
-		}
-		else {
-			red =  (2 - 2 * alpha) * 255;
-			green = 255;
-			blue = red;
-    }
+    let red, green, blue;
     
+    let keyframes = [
+      {alpha: 0.0, red: 192, green: 0, blue: 0},
+      {alpha: 0.3, red: 255, green: 0, blue: 0},
+      {alpha: 0.5, red: 255, green: 255, blue: 127},
+      {alpha: 0.7, red: 0, green: 255, blue: 0},
+      {alpha: 1.0, red: 0, green: 192, blue: 0}
+    ];
+
+    for (let i = 0; i < keyframes.length - 1; ++i) {
+      let prev = keyframes[i];
+      let next = keyframes[i + 1];
+      if (alpha <= next.alpha) {
+        let localAlpha = (alpha - prev.alpha) / (next.alpha - prev.alpha);
+        red = (1 - localAlpha) * prev.red + localAlpha * next.red;
+        green = (1 - localAlpha) * prev.green + localAlpha * next.green;
+        blue = (1 - localAlpha) * prev.blue + localAlpha * next.blue;
+        break;
+      }
+    }
+
     return this.toHexString(Math.floor(red), Math.floor(green), Math.floor(blue));
   }
 }

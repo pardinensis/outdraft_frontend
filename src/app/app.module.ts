@@ -2,6 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
+// material
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 // services
 import { HeroService } from './hero.service';
 import { ChartService } from './chart.service';
@@ -33,6 +39,11 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    // MatButtonModule,
+    // MatCheckboxModule,
+    MatCardModule,
+    MatTooltipModule
   ],
   providers: [HeroService, ChartService, ColorScaleService],
   bootstrap: [AppComponent]

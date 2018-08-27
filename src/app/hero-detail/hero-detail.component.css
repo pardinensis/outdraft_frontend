@@ -49,27 +49,49 @@
 
 .herobutton {
     display: inline-flex;
-    padding: 2px;
+    padding: 1px;
     margin: 2px;
-    border: var(--palette_dark_gray);
-    border-width: 2px;
+    border: var(--palette_background);
+    border-width: 1px;
     border-style: solid; 
 }
 
 .herobutton img {
-    width: 64px;
+    width: 46px;
     display: block;
 }
 
-td {
-    padding: 2px 8px;
-}
-
-
-h2 {
-    font-size: xx-large;
-}
-
-p {
+h3 {
     text-align: center;
+    margin: 0;
+}
+
+.cardpage {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mat-card {
+    background: var(--palette_card);
+    margin: 4px;
+    flex-grow: 1;
+}
+
+.mat-card-subtitle {
+    color: var(--palette_subtle);
+}
+
+.hero-main-card {
+    max-width: 256px;
+    max-height: 256px;
+}
+
+.hero-chart-card {
+    max-height: 256px;
+
+}
+
+.hero-matsyn-card {
+    min-width: 400px;
+    max-height: 256px;
 }

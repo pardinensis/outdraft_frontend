@@ -1,49 +1,88 @@
-<div *ngIf="hero">
-  <div class="boxrow">
-    <div class="box" id="herooverviewbox">
-      <div class="heroimage">
-        <img src="./assets/images/horizontal/{{hero.internalName}}.png"/>
-      </div>
-      <div class="heroname">
-        <h2>{{hero.name}}
-          <img src="./assets/icons/{{hero.attribute}}.png" class="attributeicon"/>
-        </h2>
-      </div>
-    </div>
+<div *ngIf="hero" class="cardpage">
+  <mat-card class="hero-main-card">
+    <mat-card-content>
+      <img mat-card-image src="./assets/images/horizontal/{{hero.internalName}}.png" alt="Image of {{hero.name}}">
+      <h3>{{hero.name}}</h3>
+    </mat-card-content>
+  </mat-card>
 
-    <!-- <div class="box">
-      <p>Win Rate by MMR</p>
-      <div class="chart" id="rankedwinratechart"></div>
-    </div> -->
-    <div class="box">
-      <p><span style="color:#888888">Adjusted Win Rate by</span><br><b>Farm Priority</b></p>
+  <mat-card class="hero-chart-card">
+    <mat-card-header>
+      <mat-card-title>Adjusted Win Rate</mat-card-title>
+      <mat-card-subtitle>by Farm Priority</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
       <div class="chart" id="farmprioritychart"></div>
-    </div>
-    <div class="box">
-      <p><span style="color:#888888">Adjusted Win Rate by</span><br><b>XP Priority</b></p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="hero-chart-card">
+    <mat-card-header>
+      <mat-card-title>Adjusted Win Rate</mat-card-title>
+      <mat-card-subtitle>by XP Priority</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
       <div class="chart" id="xpprioritychart"></div>
-    </div>    
-  </div>
-  <div class="boxrow">
-    <div class="box">
-      <p>Best With</p>
-      <div class="herotable" id="synergies">
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="hero-matsyn-card">
+    <mat-card-header>
+      <mat-card-title>Best With</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="herotable" id="goodWith">
         <div *ngFor="let hero of bestSynergies" class="herobutton">
           <a routerLink="/hero/{{hero.internalName}}">
             <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
           </a>
         </div>
       </div>
-    </div>
-    <div class="box">
-      <p>Best Against</p>
-      <div class="herotable" id="matchups">
+    </mat-card-content>
+  </mat-card>
+  
+  <mat-card class="hero-matsyn-card">
+    <mat-card-header>
+      <mat-card-title>Best Against</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="herotable" id="goodAgainst">
         <div *ngFor="let hero of bestMatchups" class="herobutton">
           <a routerLink="/hero/{{hero.internalName}}">
             <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
           </a>
         </div>
       </div>
-    </div>
-  </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="hero-matsyn-card">
+    <mat-card-header>
+      <mat-card-title>Worst With</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="herotable" id="badWith">
+        <div *ngFor="let hero of worstSynergies" class="herobutton">
+          <a routerLink="/hero/{{hero.internalName}}">
+            <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
+          </a>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
+  <mat-card class="hero-matsyn-card">
+    <mat-card-header>
+      <mat-card-title>Worst Against</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="herotable" id="badAgainst">
+        <div *ngFor="let hero of worstMatchups" class="herobutton">
+          <a routerLink="/hero/{{hero.internalName}}">
+            <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
+          </a>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>
