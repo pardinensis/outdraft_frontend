@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 import { ChartService } from '../chart.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-hero-detail',
@@ -12,6 +13,8 @@ import { ChartService } from '../chart.service';
   styleUrls: ['./hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit {
+  routeSubscription: Subscription;
+
   hero: Hero;
   bestSynergies: Hero[];
   bestMatchups: Hero[];
@@ -54,36 +57,42 @@ export class HeroDetailComponent implements OnInit {
   }
   
   ngOnInit() {
-    const internalName = this.route.snapshot.paramMap.get('internalname');
-    this.heroService.getHeroByInternalName(internalName).then(hero => {
-      this.hero = hero;
+    this.routeSubscription = this.route.params.subscribe(routeParams => {
+      const internalName = this.route.snapshot.paramMap.get('internalname');
+      this.heroService.getHeroByInternalName(internalName).then(hero => {
+        this.hero = hero;
 
-      setTimeout(() => { // wait for the DOM to finish loading
-        let bestAlly = null;
-        let bestSynergy = 0;
-        this.heroService.getAllHeroes().then(heroes => {
-          // this.buildHeroTable(heroes, "synergies", ally => this.hero.synergyWinRates[ally.id]);
-          // this.buildHeroTable(heroes, "matchups", opponent => this.hero.matchUpWinRates[opponent.id]);
+        setTimeout(() => { // wait for the DOM to finish loading
+          let bestAlly = null;
+          let bestSynergy = 0;
+          this.heroService.getAllHeroes().then(heroes => {
+            // this.buildHeroTable(heroes, "synergies", ally => this.hero.synergyWinRates[ally.id]);
+            // this.buildHeroTable(heroes, "matchups", opponent => this.hero.matchUpWinRates[opponent.id]);
 
-          heroes = heroes.slice();
-          heroes.sort((a: Hero, b: Hero) => {
-            return this.hero.synergyWinRates[b.id] - this.hero.synergyWinRates[a.id];
+            heroes = heroes.slice();
+            heroes.sort((a: Hero, b: Hero) => {
+              return this.hero.synergyWinRates[b.id] - this.hero.synergyWinRates[a.id];
+            });
+            this.bestSynergies = heroes.slice(0, this.N_SYNERGIES);
+            heroes.sort((a: Hero, b: Hero) => {
+              return this.hero.matchUpWinRates[b.id] - this.hero.matchUpWinRates[a.id];
+            });
+            this.bestMatchups = heroes.slice(0, this.N_MATCHUPS);
           });
-          this.bestSynergies = heroes.slice(0, this.N_SYNERGIES);
-          heroes.sort((a: Hero, b: Hero) => {
-            return this.hero.matchUpWinRates[b.id] - this.hero.matchUpWinRates[a.id];
+
+          this.heroService.getAllHeroes().then(allies => {
+            for (let i = 0; i < this.N_SYNERGIES; ++i) {
+              console.log(allies[i].name);
+            }
           });
-          this.bestMatchups = heroes.slice(0, this.N_MATCHUPS);
-        });
 
-        this.heroService.getAllHeroes().then(allies => {
-          for (let i = 0; i < this.N_SYNERGIES; ++i) {
-            console.log(allies[i].name);
-          }
-        });
+          this.buildCharts();
+        }); // setTimeout
+      }); // getHeroByInternalName
+    });
+  }
 
-        this.buildCharts();
-      }); // setTimeout
-    }); // getHeroByInternalName
+  ngOnDestroy() {
+    this.routeSubscription.unsubscribe();
   }
 }

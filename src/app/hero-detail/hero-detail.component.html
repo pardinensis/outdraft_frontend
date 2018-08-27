@@ -29,7 +29,9 @@
       <p>Best With</p>
       <div class="herotable" id="synergies">
         <div *ngFor="let hero of bestSynergies" class="herobutton">
-          <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
+          <a routerLink="/hero/{{hero.internalName}}">
+            <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
+          </a>
         </div>
       </div>
     </div>
