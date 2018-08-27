@@ -39,7 +39,9 @@
       <p>Best Against</p>
       <div class="herotable" id="matchups">
         <div *ngFor="let hero of bestMatchups" class="herobutton">
-          <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
+          <a routerLink="/hero/{{hero.internalName}}">
+            <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
+          </a>
         </div>
       </div>
     </div>
