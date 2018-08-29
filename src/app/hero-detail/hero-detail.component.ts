@@ -40,8 +40,8 @@ export class HeroDetailComponent implements OnInit {
   }
 
   buildCharts() {
-    // this.chartService.buildWinRateChart("rankedwinratechart", "Rank", ["\u2264 2K", "2K-3K", "3K-4K", "4K-5K", "> 5K"],
-      // this.hero.rankedWinRates, null);
+    this.chartService.buildWinRateChart("rankedwinratechart", "Rank", ["HE", "GU", "CR", "AR", "LE", "AN", "DI", "IM"],
+      this.hero.rankedWinRates, null);
     this.chartService.buildWinRateChart("farmprioritychart", "Farm Priority", ["1", "2", "3", "4", "5"],
       this.hero.farmPriorityWinRates.slice().reverse(), this.hero.farmPrioritySamples.slice().reverse());
     this.chartService.buildWinRateChart("xpprioritychart", "XP Priority", ["1", "2", "3", "4", "5"],

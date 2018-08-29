@@ -96,6 +96,10 @@ h3 {
   color: var(--palette_subtle);
 }
 
+.mat-card-content {
+  text-align: center;
+}
+
 .hero-main-card {
   max-width: 256px;
   max-height: 256px;
@@ -103,12 +107,10 @@ h3 {
 
 .hero-chart-card {
   max-height: 256px;
-
 }
 
 .hero-list-card {
   min-width: 256px;
-  /* max-height: 256px; */
 }
 
 
@@ -122,10 +124,10 @@ h3 {
   margin: 2px;
   border: var(--palette_dark_subtle);
   border-width: 1px;
-  border-style: solid; 
+  border-style: solid;
 }
 
 .herobutton img {
-    width: 50px;
-    display: block;
+  width: 50px;
+  display: block;
 }

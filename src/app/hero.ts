@@ -1,15 +1,18 @@
 export enum Attribute {
-    Strength = "Strength",
-    Agility = "Agility",
-    Intelligence = "Intelligence"
+    Strength = "str",
+    Agility = "agi",
+    Intelligence = "int"
 }
 
 export enum Bracket {
-    Crusader = 0,
-    Archon = 1,
-    Legend = 2,
-    Ancient = 3,
-    Divine = 4
+    Herald = 0,
+    Guardian = 1,
+    Crusader = 2,
+    Archon = 3,
+    Legend = 4,
+    Ancient = 5,
+    Divine = 6,
+    Immortal = 7
 }
 
 export class Hero {
@@ -28,14 +31,6 @@ export class Hero {
     synergyWinRates: number[];
     matchUpSamples: number[];
     matchUpWinRates: number[];
-
-    setRankedWinRates(winRates: number[]): void {
-        this.rankedWinRates = winRates;
-    }
-
-    setFarmPriorityWinRates(winRates: number[]): void {
-        this.farmPriorityWinRates = winRates;
-    }
 
     constructor() {
         this.id = 0;

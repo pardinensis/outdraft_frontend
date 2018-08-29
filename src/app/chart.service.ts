@@ -33,6 +33,7 @@ export class ChartService {
     var options = {
       legend: 'none',
       backgroundColor: 'transparent',
+      width: 580,
       enableInteractivity: false,
       chartArea: {
         left: "30",
@@ -80,7 +81,7 @@ export class ChartService {
         datatable.addColumn("number", "Win Rate");
         datatable.addColumn({"type": "string", "role": "annotation" });
         datatable.addColumn({"type": "string", "role": "style" });
-        for (var i = 0; i < 5; ++i) {
+        for (var i = 0; i < labels.length; ++i) {
           var tooltip = '<div>' + labels[i] + '</div>';
           let color = this.colorScaleService.calcColor(winRates[i], 0.4, 0.6);
           let annotationText = (winRates[i] * 100).toFixed(1) + "%";
