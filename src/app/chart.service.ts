@@ -68,10 +68,12 @@ export class ChartService {
       },
       annotations: {
         alwaysOutside: true,
+        highContrast: false,
         textStyle: {
           fontSize: 12,
-        },
-      },
+          color: paletteForeground,
+        }
+      }
     }
 
     google.charts.setOnLoadCallback(() => {
@@ -91,7 +93,7 @@ export class ChartService {
           ];
           if (samples != null && samples[i] < minSamplePercentage * totalSamples) {
             row.push("(" + annotationText + ")");
-            row.push("fill-opacity: 0.05; color: " + color + "; stroke-color: " + color);
+            row.push("fill-opacity: 0.05; color: " + color);
           }
           else {
             row.push(annotationText);

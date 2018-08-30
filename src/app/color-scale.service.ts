@@ -23,11 +23,11 @@ export class ColorScaleService {
     let red, green, blue;
     
     let keyframes = [
-      {alpha: 0.0, red: 192, green: 0, blue: 0},
-      {alpha: 0.3, red: 255, green: 0, blue: 0},
-      {alpha: 0.5, red: 255, green: 255, blue: 127},
-      {alpha: 0.7, red: 0, green: 255, blue: 0},
-      {alpha: 1.0, red: 0, green: 192, blue: 0}
+      {alpha: 0.0, red: 150, green: 0, blue: 30},
+      {alpha: 0.3, red: 200, green: 0, blue: 30},
+      {alpha: 0.5, red: 200, green: 200, blue: 30},
+      {alpha: 0.7, red: 0, green: 200, blue: 30},
+      {alpha: 1.0, red: 0, green: 150, blue: 30}
     ];
 
     for (let i = 0; i < keyframes.length - 1; ++i) {
