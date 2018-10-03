@@ -26,6 +26,8 @@ import { SettingsComponent } from './settings/settings.component';
 // modules
 import { AppRoutingModule } from './app-routing.module';
 import { HeroesComponent } from './heroes/heroes.component';
+import { DraftComponentComponent } from './draft-component/draft-component.component';
+import { HeroGridComponent } from './hero-grid/hero-grid.component';
 
 
 
@@ -36,7 +38,9 @@ import { HeroesComponent } from './heroes/heroes.component';
     HomeComponentComponent,
     SettingsComponent,
     ColorScaleDirective,
-    HeroesComponent
+    HeroesComponent,
+    DraftComponentComponent,
+    HeroGridComponent
   ],
   imports: [
     BrowserModule,
