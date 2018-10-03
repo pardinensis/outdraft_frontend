@@ -100,19 +100,22 @@ h3 {
   text-align: center;
 }
 
+.mat-expansion-panel-header > .mat-content {
+  justify-content: space-between;
+}
+
+.mat-content > mat-panel-title, .mat-content > mat-panel-description {
+  flex: 0 0 auto;
+}
+
+.mat-expansion-panel-header {
+  background-color: var(--palette_dark_subtle);
+  margin: 2px;
+}
+
 .hero-main-card {
   max-width: 256px;
-  max-height: 256px;
 }
-
-.hero-chart-card {
-  max-height: 256px;
-}
-
-.hero-list-card {
-  min-width: 256px;
-}
-
 
 .herotable {
   text-align: center;
@@ -128,6 +131,6 @@ h3 {
 }
 
 .herobutton img {
-  width: 50px;
+  width: 40px;
   display: block;
 }

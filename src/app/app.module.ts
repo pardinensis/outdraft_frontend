@@ -4,8 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 // material
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
 // services
@@ -42,9 +43,9 @@ import { HeroesComponent } from './heroes/heroes.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    // MatButtonModule,
-    // MatCheckboxModule,
     MatCardModule,
+    MatDividerModule,
+    MatExpansionModule,
     MatTooltipModule
   ],
   providers: [HeroService, ChartService, ColorScaleService],

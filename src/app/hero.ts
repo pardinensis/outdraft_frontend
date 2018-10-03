@@ -32,6 +32,9 @@ export class Hero {
     matchUpSamples: number[];
     matchUpWinRates: number[];
 
+    bestFarmPriority: number;
+    bestXPPriority: number;
+
     constructor() {
         this.id = 0;
         this.name = "none";

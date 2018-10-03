@@ -20,7 +20,7 @@ export class HeroDetailComponent implements OnInit {
   worstSynergies: Hero[];
   worstMatchups: Hero[];
 
-  N_SYNERGIES = 10;
+  N_SYNERGIES = 12;
 
   constructor(
     private route: ActivatedRoute,

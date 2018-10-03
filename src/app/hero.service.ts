@@ -36,6 +36,27 @@ export class HeroService {
 		this.heroesByName[hero.name] = hero;
 		this.heroesByInternalName[hero.internalName] = hero;
 		this.heroesById[hero.id] = hero;
+
+		let bestFarmPriority = 0;
+		let bestFarmPriorityWinRate = 0;
+		let totalSamples = hero.farmPrioritySamples.reduce((a, b) => a + b, 0);
+		for (let i = 0; i < 5; ++i) {
+			if (hero.farmPrioritySamples[i] / totalSamples > 0.05 && hero.farmPriorityWinRates[i] > bestFarmPriorityWinRate) {
+				bestFarmPriority = i;
+				bestFarmPriorityWinRate = hero.farmPriorityWinRates[i];
+			}
+		}
+		hero.bestFarmPriority = 5 - bestFarmPriority;
+
+		let bestXPPriority = 0;
+		let bestXPPriorityWinRate = 0;
+		for (let i = 0; i < 5; ++i) {
+			if (hero.xpPrioritySamples[i] / totalSamples > 0.05 && hero.xpPriorityWinRates[i] > bestXPPriorityWinRate) {
+				bestXPPriority = i;
+				bestXPPriorityWinRate = hero.xpPriorityWinRates[i];
+			}
+		}
+		hero.bestXPPriority = 5 - bestXPPriority;
 	}
 
 	wait(): Promise<void> {

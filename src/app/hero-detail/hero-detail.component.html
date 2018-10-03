@@ -6,34 +6,46 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="hero-chart-card">
+  <mat-card>
     <mat-card-header>
-      <mat-card-title>Win Rate</mat-card-title>
-      <mat-card-subtitle>by Seasonal Rank</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
-      <div class="chart" id="rankedwinratechart"></div>
-    </mat-card-content>
-  </mat-card>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Win Rate
+          </mat-panel-title>
+          <mat-panel-description>
+            {{(hero.rankedWinRates[6] * 100).toFixed(1) + "%"}}
+          </mat-panel-description>
+          </mat-expansion-panel-header>
+        <div class="chart" id="rankedwinratechart"></div>
+      </mat-expansion-panel>
 
-  <mat-card class="hero-chart-card">
-    <mat-card-header>
-      <mat-card-title>Adjusted Win Rate</mat-card-title>
-      <mat-card-subtitle>by Farm Priority</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="chart" id="farmprioritychart"></div>
-    </mat-card-content>
-  </mat-card>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Farm Priority
+          </mat-panel-title>
+          <mat-panel-description>
+            {{hero.bestFarmPriority}}
+          </mat-panel-description>
+          </mat-expansion-panel-header>
+        <div class="chart" id="farmprioritychart"></div>
+      </mat-expansion-panel>
 
-  <mat-card class="hero-chart-card">
-    <mat-card-header>
-      <mat-card-title>Adjusted Win Rate</mat-card-title>
-      <mat-card-subtitle>by XP Priority</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="chart" id="xpprioritychart"></div>
-    </mat-card-content>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            XP Priority
+          </mat-panel-title>
+          <mat-panel-description>
+            {{hero.bestXPPriority}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="chart" id="xpprioritychart"></div>
+      </mat-expansion-panel>
+    </mat-accordion>
   </mat-card>
 
   <mat-card class="hero-list-card">

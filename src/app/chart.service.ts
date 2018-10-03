@@ -33,7 +33,8 @@ export class ChartService {
     var options = {
       legend: 'none',
       backgroundColor: 'transparent',
-      width: 580,
+      width: winRates.length * 80 + 120,
+      height: 180,
       enableInteractivity: false,
       chartArea: {
         left: "30",
