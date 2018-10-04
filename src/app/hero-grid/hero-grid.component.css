@@ -1,3 +1,11 @@
+table {
+    margin: 0 auto;
+}
+
+td {
+    padding: 4px;
+}
+
 h4 {
     display: block;
     font-weight: lighter;
