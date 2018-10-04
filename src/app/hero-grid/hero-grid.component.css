@@ -1,0 +1,10 @@
+.attribute-section {
+    margin: 20px;
+    display: flex;
+}
+
+h4 {
+    display: block;
+    font-weight: lighter;
+    transform: translateX(-50%) rotate(-90deg) translateY(20px);
+}

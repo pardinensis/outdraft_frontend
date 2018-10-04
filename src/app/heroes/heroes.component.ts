@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Hero, Attribute } from '../hero';
-import { HeroService } from '../hero.service';
+import { Hero } from '../hero';
 import { HeroGridComponent } from '../hero-grid/hero-grid.component';
 
 @Component({
@@ -14,13 +13,9 @@ export class HeroesComponent implements OnInit {
   @ViewChild(HeroGridComponent)
   heroGrid: HeroGridComponent;
 
-  blub(hero: Hero, router: Router) {
-    router.navigate(["./hero/" + hero.internalName]);
-  }
-
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.heroGrid.setOnClickAction((hero: Hero) => this.blub(hero, this.router));
+    this.heroGrid.setOnClickAction((hero: Hero) => this.router.navigate(["./hero/" + hero.internalName]));
   }
 }
