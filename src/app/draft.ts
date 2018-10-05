@@ -66,14 +66,14 @@ export class Draft {
         return totalWinRate;        
     }
 
-    evaluateFarmPriority(heroes: Hero[]): number {
-        let maxFPWinRates: {[id: number]: number} = {};
+    evaluatePriority(heroes: Hero[], priorityWinRate: (hero: Hero, priority: number) => number): number {
+        let maxWinRates: {[id: number]: number} = {};
         heroes.forEach((hero: Hero) => {
             let maxWinRate = 0;
-            hero.farmPriorityWinRates.forEach((winRate: number) => {
-                maxWinRate = Math.max(maxWinRate, winRate);
-            });
-            maxFPWinRates[hero.id] = maxWinRate;
+            for (let i = 0; i < 5; ++i) {
+                maxWinRate = Math.max(maxWinRate, priorityWinRate(hero, i));
+            }
+            maxWinRates[hero.id] = maxWinRate;
         });
 
         let bestWinRate = 0;
@@ -81,7 +81,7 @@ export class Draft {
         this.permutations.forEach((permutation: number[]) => {
             let winRate = 0.5;
             for (let i = 0; i < heroes.length; ++i) {
-                winRate = this.combine(winRate, heroes[i].farmPriorityWinRates[permutation[i]] - maxFPWinRates[heroes[i].id] + 0.5);
+                winRate = this.combine(winRate, priorityWinRate(heroes[i], permutation[i]) - maxWinRates[heroes[i].id] + 0.5);
             }
             if (winRate > bestWinRate) {
                 bestWinRate = winRate;
@@ -90,6 +90,18 @@ export class Draft {
         });
         
         return bestWinRate;
+    }
+
+    evaluateFarmPriority(heroes: Hero[]) {
+        return this.evaluatePriority(heroes, (hero: Hero, priority: number) => {
+            return hero.farmPriorityWinRates[priority];
+        });
+    }
+
+    evaluateXPPriority(heroes: Hero[]) {
+        return this.evaluatePriority(heroes, (hero: Hero, priority: number) => {
+            return hero.xpPriorityWinRates[priority];
+        });
     }
 
     evaluate(allyHeroes: Hero[], enemyHeroes: Hero[]): number {
@@ -104,6 +116,7 @@ export class Draft {
         totalWinRate = this.combine(totalWinRate, 1 - this.evaluateSynergies(enemyHeroes));
         totalWinRate = this.combine(totalWinRate, this.evaluateMatchUps(allyHeroes, enemyHeroes));
         totalWinRate = this.combine(totalWinRate, this.evaluateFarmPriority(allyHeroes));
+        // totalWinRate = this.combine(totalWinRate, this.evaluateXPPriority(allyHeroes));
 
         return totalWinRate;
     }
