@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Hero } from '../hero';
+import { Draft } from '../draft';
 import { HeroGridComponent } from '../hero-grid/hero-grid.component';
+import { HeroService } from '../hero.service';
 
 class DraftPanel {
   element: HTMLElement;
@@ -15,12 +17,25 @@ class DraftPanel {
     });
   }
 
-  addHighlight() {
+  addHighlight(): void {
     this.element.style.boxShadow = "0px 0px 6px white";
   }
 
-  removeHighlight() {
+  removeHighlight(): void {
     this.element.style.boxShadow = "none";
+  }
+}
+
+class SuggestionPanel {
+  element: HTMLElement;
+  hero: Hero;
+
+  constructor(public id: number) {
+    this.element = null;
+    this.hero = Hero.NONE;
+    setTimeout(() => {
+      this.element = document.getElementById("suggestion-panel-" + id);
+    })
   }
 }
 
@@ -36,10 +51,17 @@ export class DraftComponentComponent implements OnInit {
   allyDraftPanels: DraftPanel[];
   enemyDraftPanels: DraftPanel[];
   draftPanels: DraftPanel[];
-
   selectedDraftPanel = null;
 
-  constructor() {
+  allySuggestionPanels: SuggestionPanel[];
+  enemySuggestionPanels: SuggestionPanel[];
+
+  draft: Draft;
+
+  readonly nSuggestions = 24;
+
+
+  constructor(private heroService: HeroService) {
     this.allyDraftPanels = [];
     this.enemyDraftPanels = [];
     this.draftPanels = [];
@@ -51,19 +73,63 @@ export class DraftComponentComponent implements OnInit {
       this.draftPanels[i + 5] = this.enemyDraftPanels[i];
     }
 
-    // this.draftPanels.forEach((panel) => panel.setDraftPanels(this.draftPanels));
+    this.allySuggestionPanels = [];
+    this.enemySuggestionPanels = [];
+    for (let i = 0; i < this.nSuggestions; ++i) {
+      this.allySuggestionPanels[i] = new SuggestionPanel(i);
+      this.enemySuggestionPanels[i] = new SuggestionPanel(i + this.nSuggestions);
+    }
+
+    this.draft = new Draft(heroService);
+
+    setTimeout(() => this.update());
   }
 
-  select(panel: DraftPanel) {
+  select(panel: DraftPanel): boolean {
     this.draftPanels.forEach((p) => p.removeHighlight());
     panel.addHighlight();
     this.selectedDraftPanel = panel;
+
+    return false;
   }
 
-  pick(hero: Hero) {
+  remove(panel: DraftPanel): boolean {
+    panel.hero = Hero.NONE;
+
+    this.update();
+    return false;
+  }
+
+  pick(hero: Hero): boolean {
     if (this.selectedDraftPanel !== null) {
       this.selectedDraftPanel.hero = hero;
     }
+
+    this.update();
+    return false;
+  }
+
+  update(): void {
+    let allyHeroes: Hero[] = [];
+    this.allyDraftPanels.forEach((panel) => {
+      if (panel.hero !== Hero.NONE) {
+        allyHeroes.push(panel.hero);
+      }
+    });
+    let enemyHeroes: Hero[] = [];
+    this.enemyDraftPanels.forEach((panel) => {
+      if (panel.hero !== Hero.NONE) {
+        enemyHeroes.push(panel.hero);
+      }
+    });
+
+    console.log(this.draft.evaluate(allyHeroes, enemyHeroes));
+
+    this.draft.suggest(allyHeroes, enemyHeroes, this.nSuggestions).then((heroes: Hero[]) => {
+      for (let i = 0; i < heroes.length; ++i) {
+        this.allySuggestionPanels[i].hero = heroes[i];
+      }
+    });
   }
 
   ngOnInit() {

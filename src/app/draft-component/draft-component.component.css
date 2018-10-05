@@ -4,15 +4,28 @@ app-hero-grid {
 
 .draft-area {
     display: flex;
+    justify-content: center;
+    padding: 10px;
 }
 
 .draft-panel {
     padding: 2px;
+    margin: 0 auto;
 }
 
 .draft-panel-image {
     display: inline-block;
-    width: 96px;
+    width: 104px;
     margin: 4px;
     border: 2px solid var(--palette_dark_subtle);
+}
+
+.suggestion-area {
+    display: flex;
+    justify-content: center;
+    padding: 2px;
+}
+
+.suggestion-panel {
+    padding: 2px;
 }

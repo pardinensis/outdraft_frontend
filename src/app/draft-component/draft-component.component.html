@@ -1,14 +1,48 @@
 <div class="cardpage">
     <mat-card class="draft-area">
         <div *ngFor="let panel of allyDraftPanels" class="draft-panel">
-            <img src="./assets/images/vertical/{{panel.hero.internalName}}.png" class="draft-panel-image" (click)="select(panel)" id="draft-panel-{{panel.id}}"/>
+            <img
+                src="./assets/images/horizontal/{{panel.hero.internalName}}.png"
+                class="draft-panel-image"
+                id="draft-panel-{{panel.id}}"
+                (click)="select(panel)"
+                (contextmenu)="remove(panel)"
+            />
         </div>
     </mat-card>
 
     <mat-card class="draft-area">
         <div *ngFor="let panel of enemyDraftPanels" class="draft-panel">
-            <img src="./assets/images/vertical/{{panel.hero.internalName}}.png" class="draft-panel-image" (click)="select(panel)" id="draft-panel-{{panel.id}}"/>
-        </div>      
+            <img
+                src="./assets/images/horizontal/{{panel.hero.internalName}}.png"
+                class="draft-panel-image"
+                id="draft-panel-{{panel.id}}"
+                (click)="select(panel)"
+                (contextmenu)="remove(panel)"
+            />
+        </div>
+    </mat-card>
+
+    <mat-card class="suggestion-area">
+        <div *ngFor="let panel of allySuggestionPanels" class="herobutton">
+            <img
+                src="./assets/images/vertical/{{panel.hero.internalName}}.png"
+                class="suggestion-panel-image"
+                id="suggestion-panel-{{panel.id}}"
+                (click)="pick(panel.hero)"
+            />
+        </div>
+    </mat-card>
+
+    <mat-card class="suggestion-area">
+        <div *ngFor="let panel of enemySuggestionPanels" class="herobutton">
+            <img
+                src="./assets/images/vertical/{{panel.hero.internalName}}.png"
+                class="suggestion-panel-image"
+                id="suggestion-panel-{{panel.id}}"
+                (click)="pick(panel.hero)"
+            />
+        </div>
     </mat-card>
 
     <app-hero-grid></app-hero-grid>  
