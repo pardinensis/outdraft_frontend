@@ -4,7 +4,34 @@ import { HeroService } from './hero.service';
 export class Draft {
     static bracket = Bracket.Ancient;
 
-    constructor(private heroService: HeroService) { }
+    permutations: number[][];
+
+    generatePermutations(a: number[], size: number): void {
+        if (size <= 1) {
+            this.permutations.push(a.slice());
+        }
+        else {
+            for (let i = 0; i < size; ++i) {
+                this.generatePermutations(a, size - 1);
+                if (size % 2 === 1) {
+                    let tmp = a[0];
+                    a[0] = a[size - 1];
+                    a[size - 1] = tmp;
+                }
+                else {
+                    let tmp = a[i]; 
+                    a[i] = a[size - 1]; 
+                    a[size - 1] = tmp; 
+                }
+            }
+        }
+    }
+
+    constructor(private heroService: HeroService) {
+        this.permutations = [];        
+        let a = [0, 1, 2, 3, 4];
+        this.generatePermutations(a, 5);
+    }
 
     combine(winRate1: number, winRate2: number): number {
         return winRate1 * winRate2 / (winRate1 * winRate2 + (1 - winRate1) * (1 - winRate2));
@@ -17,17 +44,11 @@ export class Draft {
         return totalWinRate;
     }
 
-    evaluateSynergies(allyHeroes: Hero[], enemyHeroes: Hero[]): number {
+    evaluateSynergies(heroes: Hero[]): number {
         let totalWinRate = 0.5;
-        for (let i = 0; i < allyHeroes.length; ++i) {
-            for (let j = i + 1; j < allyHeroes.length; ++j) {
-                let winRate = allyHeroes[i].synergyWinRates[allyHeroes[j].id];
-                totalWinRate = this.combine(totalWinRate, winRate);
-            }
-        }
-        for (let i = 0; i < enemyHeroes.length; ++i) {
-            for (let j = i + 1; j < enemyHeroes.length; ++j) {
-                let winRate = 1 - enemyHeroes[i].synergyWinRates[enemyHeroes[j].id];
+        for (let i = 0; i < heroes.length; ++i) {
+            for (let j = i + 1; j < heroes.length; ++j) {
+                let winRate = heroes[i].synergyWinRates[heroes[j].id];
                 totalWinRate = this.combine(totalWinRate, winRate);
             }
         }
@@ -45,6 +66,32 @@ export class Draft {
         return totalWinRate;        
     }
 
+    evaluateFarmPriority(heroes: Hero[]): number {
+        let maxFPWinRates: {[id: number]: number} = {};
+        heroes.forEach((hero: Hero) => {
+            let maxWinRate = 0;
+            hero.farmPriorityWinRates.forEach((winRate: number) => {
+                maxWinRate = Math.max(maxWinRate, winRate);
+            });
+            maxFPWinRates[hero.id] = maxWinRate;
+        });
+
+        let bestWinRate = 0;
+        let bestPermutation = [];
+        this.permutations.forEach((permutation: number[]) => {
+            let winRate = 0.5;
+            for (let i = 0; i < heroes.length; ++i) {
+                winRate = this.combine(winRate, heroes[i].farmPriorityWinRates[permutation[i]] - maxFPWinRates[heroes[i].id] + 0.5);
+            }
+            if (winRate > bestWinRate) {
+                bestWinRate = winRate;
+                bestPermutation = permutation;
+            }
+        });
+        
+        return bestWinRate;
+    }
+
     evaluate(allyHeroes: Hero[], enemyHeroes: Hero[]): number {
         let totalWinRate = 0.5;
 
@@ -53,8 +100,10 @@ export class Draft {
         }
 
         totalWinRate = this.combine(totalWinRate, this.evaluateRankedWinRates(allyHeroes, enemyHeroes));
-        totalWinRate = this.combine(totalWinRate, this.evaluateSynergies(allyHeroes, enemyHeroes));
+        totalWinRate = this.combine(totalWinRate, this.evaluateSynergies(allyHeroes));
+        totalWinRate = this.combine(totalWinRate, 1 - this.evaluateSynergies(enemyHeroes));
         totalWinRate = this.combine(totalWinRate, this.evaluateMatchUps(allyHeroes, enemyHeroes));
+        totalWinRate = this.combine(totalWinRate, this.evaluateFarmPriority(allyHeroes));
 
         return totalWinRate;
     }
