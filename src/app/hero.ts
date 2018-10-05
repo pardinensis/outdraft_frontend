@@ -41,4 +41,6 @@ export class Hero {
         this.internalName = "empty";
         this.attribute = Attribute.Strength;
     }
+
+    static NONE = new Hero();
 }

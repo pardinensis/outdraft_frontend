@@ -2,3 +2,17 @@ app-hero-grid {
     flex-grow: 1;
 }
 
+.draft-area {
+    display: flex;
+}
+
+.draft-panel {
+    padding: 2px;
+}
+
+.draft-panel-image {
+    display: inline-block;
+    width: 96px;
+    margin: 4px;
+    border: 2px solid var(--palette_dark_subtle);
+}
