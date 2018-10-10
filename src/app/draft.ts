@@ -49,7 +49,7 @@ export class Draft {
         for (let i = 0; i < heroes.length; ++i) {
             for (let j = i + 1; j < heroes.length; ++j) {
                 let winRate = heroes[i].synergyWinRates[heroes[j].id];
-                totalWinRate = this.combine(totalWinRate, winRate);
+                totalWinRate = this.combine(totalWinRate, winRate);``
             }
         }
         return totalWinRate;        
@@ -88,7 +88,7 @@ export class Draft {
                 bestPermutation = permutation;
             }
         });
-        
+
         return bestWinRate;
     }
 
@@ -116,7 +116,7 @@ export class Draft {
         totalWinRate = this.combine(totalWinRate, 1 - this.evaluateSynergies(enemyHeroes));
         totalWinRate = this.combine(totalWinRate, this.evaluateMatchUps(allyHeroes, enemyHeroes));
         totalWinRate = this.combine(totalWinRate, this.evaluateFarmPriority(allyHeroes));
-        // totalWinRate = this.combine(totalWinRate, this.evaluateXPPriority(allyHeroes));
+        totalWinRate = this.combine(totalWinRate, this.evaluateXPPriority(allyHeroes));
 
         return totalWinRate;
     }
@@ -136,10 +136,10 @@ export class Draft {
                     if (available[hero.id]) {
                         let newAllyHeroes: Hero[] = allyHeroes.slice();
                         newAllyHeroes.push(hero);
-                        possiblePicks.push({
-                            hero: hero,
-                            winRate: this.evaluate(newAllyHeroes, enemyHeroes),
-                        });
+                        let winRate = this.evaluate(newAllyHeroes, enemyHeroes);
+                        if (winRate > 0) {
+                            possiblePicks.push({ hero: hero, winRate: winRate });
+                        }
                     }
                 });
 

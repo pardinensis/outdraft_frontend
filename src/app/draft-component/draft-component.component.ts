@@ -126,8 +126,13 @@ export class DraftComponentComponent implements OnInit {
     console.log(this.draft.evaluate(allyHeroes, enemyHeroes));
 
     this.draft.suggest(allyHeroes, enemyHeroes, this.nSuggestions).then((heroes: Hero[]) => {
-      for (let i = 0; i < heroes.length; ++i) {
-        this.allySuggestionPanels[i].hero = heroes[i];
+      for (let i = 0; i < this.allySuggestionPanels.length; ++i) {
+        if (i < heroes.length) {
+          this.allySuggestionPanels[i].hero = heroes[i];
+        }
+        else {
+          this.allySuggestionPanels[i].hero = Hero.NONE;
+        }
       }
     });
   }
