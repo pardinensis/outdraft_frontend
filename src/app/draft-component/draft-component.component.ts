@@ -29,10 +29,12 @@ class DraftPanel {
 class SuggestionPanel {
   element: HTMLElement;
   hero: Hero;
+  opacity: number;
 
   constructor(public id: number) {
     this.element = null;
     this.hero = Hero.NONE;
+    this.opacity = 0.5;
     setTimeout(() => {
       this.element = document.getElementById("suggestion-panel-" + id);
     })
@@ -56,6 +58,11 @@ export class DraftComponentComponent implements OnInit {
   allySuggestionPanels: SuggestionPanel[];
   enemySuggestionPanels: SuggestionPanel[];
 
+  allySuggestionPanels1: SuggestionPanel[];
+  allySuggestionPanels2: SuggestionPanel[];
+  enemySuggestionPanels1: SuggestionPanel[];
+  enemySuggestionPanels2: SuggestionPanel[];
+
   draft: Draft;
 
   readonly nSuggestions = 24;
@@ -74,10 +81,23 @@ export class DraftComponentComponent implements OnInit {
     }
 
     this.allySuggestionPanels = [];
+    this.allySuggestionPanels1 = [];
+    this.allySuggestionPanels2 = [];
     this.enemySuggestionPanels = [];
+    this.enemySuggestionPanels1 = [];
+    this.enemySuggestionPanels2 = [];
     for (let i = 0; i < this.nSuggestions; ++i) {
       this.allySuggestionPanels[i] = new SuggestionPanel(i);
       this.enemySuggestionPanels[i] = new SuggestionPanel(i + this.nSuggestions);
+
+      if (i < this.nSuggestions / 2) {
+        this.allySuggestionPanels1[i] = this.allySuggestionPanels[i];
+        this.enemySuggestionPanels1[i] = this.enemySuggestionPanels[i];
+      }
+      else {
+        this.allySuggestionPanels2[i - this.nSuggestions / 2] = this.allySuggestionPanels[i];
+        this.enemySuggestionPanels2[i - this.nSuggestions / 2] = this.enemySuggestionPanels[i];
+      }
     }
 
     this.draft = new Draft(heroService);
@@ -134,6 +154,17 @@ export class DraftComponentComponent implements OnInit {
         }
         else {
           this.allySuggestionPanels[i].hero = Hero.NONE;
+        }
+      }
+    });
+
+    this.draft.suggest(enemyHeroes, allyHeroes, this.nSuggestions).then((heroes: Hero[]) => {
+      for (let i = 0; i < this.enemySuggestionPanels.length; ++i) {
+        if (i < heroes.length) {
+          this.enemySuggestionPanels[i].hero = heroes[i];
+        }
+        else {
+          this.enemySuggestionPanels[i].hero = Hero.NONE;
         }
       }
     });

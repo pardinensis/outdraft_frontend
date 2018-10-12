@@ -24,25 +24,53 @@
     </mat-card>
 
     <mat-card class="suggestion-area">
-        <div *ngFor="let panel of allySuggestionPanels" class="herobutton">
-            <img
-                src="./assets/images/vertical/{{panel.hero.internalName}}.png"
-                class="suggestion-panel-image"
-                id="suggestion-panel-{{panel.id}}"
-                (click)="pick(panel.hero)"
-            />
-        </div>
+            <table>
+                <tr>
+                    <td *ngFor="let panel of allySuggestionPanels1" class="herobutton">
+                        <img
+                            src="./assets/images/vertical/{{panel.hero.internalName}}.png"
+                            class="suggestion-panel-image"
+                            id="suggestion-panel-{{panel.id}}"
+                            (click)="pick(panel.hero)"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td *ngFor="let panel of allySuggestionPanels2" class="herobutton">
+                        <img
+                            src="./assets/images/vertical/{{panel.hero.internalName}}.png"
+                            class="suggestion-panel-image"
+                            id="suggestion-panel-{{panel.id}}"
+                            (click)="pick(panel.hero)"
+                        />
+                    </td>
+                </tr>
+            </table>
     </mat-card>
 
     <mat-card class="suggestion-area">
-        <div *ngFor="let panel of enemySuggestionPanels" class="herobutton">
-            <img
-                src="./assets/images/vertical/{{panel.hero.internalName}}.png"
-                class="suggestion-panel-image"
-                id="suggestion-panel-{{panel.id}}"
-                (click)="pick(panel.hero)"
-            />
-        </div>
+        <table>
+            <tr>
+                <td *ngFor="let panel of enemySuggestionPanels1" class="herobutton">
+                    <img
+                        src="./assets/images/vertical/{{panel.hero.internalName}}.png"
+                        class="suggestion-panel-image"
+                        id="suggestion-panel-{{panel.id}}"
+                        (click)="pick(panel.hero)"
+                    />
+                </td>
+            </tr>
+            <tr>
+                <td *ngFor="let panel of enemySuggestionPanels2" class="herobutton">
+                    <img
+                        src="./assets/images/vertical/{{panel.hero.internalName}}.png"
+                        class="suggestion-panel-image"
+                        id="suggestion-panel-{{panel.id}}"
+                        (click)="pick(panel.hero)"
+                    />
+                </td>
+            </tr>
+        </table>
     </mat-card>
 
     <app-hero-grid></app-hero-grid>  
