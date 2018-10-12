@@ -82,7 +82,9 @@ export class DraftComponentComponent implements OnInit {
 
     this.draft = new Draft(heroService);
 
-    setTimeout(() => this.update());
+    setTimeout(() => {
+      this.update();
+    });
   }
 
   select(panel: DraftPanel): boolean {

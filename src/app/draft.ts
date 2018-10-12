@@ -121,6 +121,21 @@ export class Draft {
         return totalWinRate;
     }
 
+    evaluateAllyPick(allyHeroes: Hero[], enemyHeroes: Hero[], allyPick: Hero): number {
+        let newAllyHeroes = allyHeroes.slice();
+        newAllyHeroes.push(allyPick);
+        let totalWinRate = this.evaluate(newAllyHeroes, enemyHeroes);
+
+        let nOpenAllyPicks = Math.max(0, 4 - allyHeroes.length);
+        totalWinRate -= nOpenAllyPicks * allyPick.synergySpecifity;
+
+        let nOpenEnemyPicks = Math.max(0, 5 - enemyHeroes.length);
+        totalWinRate -= nOpenEnemyPicks * allyPick.matchUpSpecifity;
+
+
+        return totalWinRate;
+    }
+
     suggest(allyHeroes: Hero[], enemyHeroes: Hero[], nSuggestions: number): Promise<Hero[]> {
         return new Promise((resolve, reject) => {
             this.heroService.getAllHeroes().then((heroes: Hero[]) => {
@@ -134,9 +149,7 @@ export class Draft {
                 let possiblePicks: {hero: Hero, winRate: number}[] = [];
                 heroes.forEach((hero: Hero) => {
                     if (available[hero.id]) {
-                        let newAllyHeroes: Hero[] = allyHeroes.slice();
-                        newAllyHeroes.push(hero);
-                        let winRate = this.evaluate(newAllyHeroes, enemyHeroes);
+                        let winRate = this.evaluateAllyPick(allyHeroes, enemyHeroes, hero);
                         if (winRate > 0) {
                             possiblePicks.push({ hero: hero, winRate: winRate });
                         }

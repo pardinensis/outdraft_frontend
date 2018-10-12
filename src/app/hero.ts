@@ -32,6 +32,9 @@ export class Hero {
     matchUpSamples: number[];
     matchUpWinRates: number[];
 
+    synergySpecifity: number;
+    matchUpSpecifity: number;
+
     bestFarmPriority: number;
     bestXPPriority: number;
 
