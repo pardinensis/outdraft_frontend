@@ -7,12 +7,14 @@
         </td> -->
         <td>
           <div>
-            <div *ngFor="let hero of strengthHeroes1" class="herobutton" (click)="onClickAction(hero)">
+            <div *ngFor="let hero of strengthHeroes1" class="herobutton" (click)="onClickAction(hero)"
+                (mouseenter)="onHoverAction(hero)" (mouseleave)="onHoverEndAction(hero)">
               <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
             </div>
           </div>
           <div>
-            <div *ngFor="let hero of strengthHeroes2" class="herobutton" (click)="onClickAction(hero)">
+            <div *ngFor="let hero of strengthHeroes2" class="herobutton" (click)="onClickAction(hero)"
+                (mouseenter)="onHoverAction(hero)" (mouseleave)="onHoverEndAction(hero)">
               <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
             </div>
           </div>
@@ -24,12 +26,14 @@
         </td> -->
         <td>
           <div>
-            <div *ngFor="let hero of agilityHeroes1" class="herobutton" (click)="onClickAction(hero)">
+            <div *ngFor="let hero of agilityHeroes1" class="herobutton" (click)="onClickAction(hero)"
+                (mouseenter)="onHoverAction(hero)" (mouseleave)="onHoverEndAction(hero)">
               <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
             </div>
           </div>
           <div>
-            <div *ngFor="let hero of agilityHeroes2" class="herobutton" (click)="onClickAction(hero)">
+            <div *ngFor="let hero of agilityHeroes2" class="herobutton" (click)="onClickAction(hero)"
+                (mouseenter)="onHoverAction(hero)" (mouseleave)="onHoverEndAction(hero)">
               <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
             </div>
           </div>
@@ -41,12 +45,14 @@
         </td> -->
         <td>
           <div>
-            <div *ngFor="let hero of intelligenceHeroes1" class="herobutton" (click)="onClickAction(hero)">
+            <div *ngFor="let hero of intelligenceHeroes1" class="herobutton" (click)="onClickAction(hero)"
+                (mouseenter)="onHoverAction(hero)" (mouseleave)="onHoverEndAction(hero)">
               <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
             </div>
           </div>
           <div>
-            <div *ngFor="let hero of intelligenceHeroes2" class="herobutton" (click)="onClickAction(hero)">
+            <div *ngFor="let hero of intelligenceHeroes2" class="herobutton" (click)="onClickAction(hero)"
+                (mouseenter)="onHoverAction(hero)" (mouseleave)="onHoverEndAction(hero)">
               <img src="./assets/images/vertical/{{hero.internalName}}.png"/>
             </div>
           </div>

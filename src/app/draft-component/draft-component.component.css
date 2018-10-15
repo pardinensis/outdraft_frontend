@@ -20,6 +20,11 @@ app-hero-grid {
     border: 2px solid var(--palette_dark_subtle);
 }
 
+.draft-panel-desc {
+    text-align: center;
+    font-size: small;
+}
+
 .suggestion-area {
     display: flex;
     justify-content: center;

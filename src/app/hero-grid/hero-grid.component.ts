@@ -17,6 +17,8 @@ export class HeroGridComponent implements OnInit {
   intelligenceHeroes2: Hero[];
 
   onClickAction: (Hero) => void;
+  onHoverAction: (Hero) => void;
+  onHoverEndAction: (Hero) => void;
 
   constructor(
     private heroService: HeroService
@@ -27,15 +29,18 @@ export class HeroGridComponent implements OnInit {
     this.agilityHeroes2 = [];
     this.intelligenceHeroes1 = [];
     this.intelligenceHeroes2 = [];
-    this.onClickAction = this.clicked;
-  }
-
-  public clicked(hero: Hero) {
-    console.log(hero.name);
+    this.onClickAction = (hero) => void {};
+    this.onHoverAction = (hero) => void {};
+    this.onHoverEndAction = (hero) => void {};
   }
 
   setOnClickAction(f: (Hero) => void) {
     this.onClickAction = f;
+  }
+
+  setOnHoverActions(enter: (Hero) => void, leave: (Hero) => void) {
+    this.onHoverAction = enter;
+    this.onHoverEndAction = leave;
   }
 
   ngOnInit() {
