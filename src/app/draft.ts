@@ -1,11 +1,10 @@
-import { Hero, Bracket } from './hero';
+import { Hero, Bracket, SeasonalRank } from './hero';
 import { HeroService } from './hero.service';
 
 export class Draft {
-    static bracket = Bracket.Ancient;
+    static averageSeasonalRank = new SeasonalRank(Bracket.Divine, 1);
 
     permutations: number[][];
-
     generatePermutations(a: number[], size: number): void {
         if (size <= 1) {
             this.permutations.push(a.slice());
@@ -33,14 +32,36 @@ export class Draft {
         this.generatePermutations(a, 5);
     }
 
+    getRankedWinRate(hero: Hero): number {
+        const nMedals = 5;
+        const centerMedal = (nMedals + 1) / 2;
+
+        let mainBracket: number = Draft.averageSeasonalRank.bracket;
+        let mainBracketWR = hero.rankedWinRates[mainBracket];
+
+        let medal = Draft.averageSeasonalRank.medal;
+        if (medal <= centerMedal) {
+            let lowerBracket: number = Math.max(mainBracket - 1, Bracket.Herald);
+            let lowerBracketWR = hero.rankedWinRates[lowerBracket];
+            let alpha = (centerMedal - medal) / nMedals;
+            return alpha * lowerBracketWR + (1 - alpha) * mainBracketWR;
+        }
+        else {
+            let upperBracket: number = Math.min(mainBracket + 1, Bracket.Immortal);
+            let upperBracketWR = hero.rankedWinRates[upperBracket];
+            let alpha = (medal - centerMedal) / nMedals;
+            return alpha * upperBracketWR + (1 - alpha) * mainBracketWR;
+        }
+    }
+
     combine(winRate1: number, winRate2: number): number {
         return winRate1 * winRate2 / (winRate1 * winRate2 + (1 - winRate1) * (1 - winRate2));
     }
 
     evaluateRankedWinRates(allyHeroes: Hero[], enemyHeroes: Hero[]): number {
         let totalWinRate = 0.5;
-        allyHeroes.forEach((hero) => totalWinRate = this.combine(totalWinRate, hero.rankedWinRates[Draft.bracket]));
-        enemyHeroes.forEach((hero) => totalWinRate = this.combine(totalWinRate, 1 - hero.rankedWinRates[Draft.bracket]));
+        allyHeroes.forEach((hero) => totalWinRate = this.combine(totalWinRate, this.getRankedWinRate(hero)));
+        enemyHeroes.forEach((hero) => totalWinRate = this.combine(totalWinRate, 1 - this.getRankedWinRate(hero)));
         return totalWinRate;
     }
 

@@ -15,6 +15,16 @@ export enum Bracket {
     Immortal = 7
 }
 
+export class SeasonalRank {
+    bracket: Bracket;
+    medal: number;
+
+    constructor(bracket: Bracket, medal: number) {
+        this.bracket = bracket;
+        this.medal = medal;
+    }
+}
+
 export class Hero {
     id: number;
     name: string;
