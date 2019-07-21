@@ -140,7 +140,7 @@ export class DraftComponentComponent implements OnInit {
   }
 
   hover(hero: Hero): boolean {
-    if (this.selectedDraftPanel !== null) {
+    if (this.selectedDraftPanel !== null && hero != Hero.NONE) {
       this.selectedDraftPanel.hero = hero;
 
       this.allyDraftPanels.forEach((panel: DraftPanel) => {
