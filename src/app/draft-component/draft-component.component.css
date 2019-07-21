@@ -34,3 +34,8 @@ app-hero-grid {
 .suggestion-panel {
     padding: 2px;
 }
+
+.winrate-panel {
+    text-align: center;
+    font-size: larger;
+}

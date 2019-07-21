@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Hero } from '../hero';
 import { Draft } from '../draft';
+import { ColorScaleService } from '../color-scale.service';
 import { HeroGridComponent } from '../hero-grid/hero-grid.component';
 import { HeroService } from '../hero.service';
 
@@ -45,6 +46,23 @@ class SuggestionPanel {
   }
 }
 
+class WinRatePanel {
+  element: HTMLElement;
+  winRate: string;
+
+  constructor() {
+    this.element = null;
+    this.winRate = "50.00%"
+    setTimeout(() => {
+      this.element = document.getElementById("winrate-panel");
+    })
+  }
+
+  setWinRate(winRate: number): void {
+    this.winRate = (winRate * 100).toFixed(2) + "%";
+  }
+}
+
 @Component({
   selector: 'app-draft-component',
   templateUrl: './draft-component.component.html',
@@ -60,6 +78,8 @@ export class DraftComponentComponent implements OnInit {
   selectedDraftPanel = null;
   selectedDraftPanelIsAlly = false;
 
+  winRatePanel: WinRatePanel;
+
   allySuggestionPanels: SuggestionPanel[];
   enemySuggestionPanels: SuggestionPanel[];
 
@@ -73,7 +93,7 @@ export class DraftComponentComponent implements OnInit {
   readonly nSuggestions = 24;
 
 
-  constructor(private heroService: HeroService) {
+  constructor(private heroService: HeroService, private colorScaleService: ColorScaleService) {
     this.allyDraftPanels = [];
     this.enemyDraftPanels = [];
     this.draftPanels = [];
@@ -84,6 +104,8 @@ export class DraftComponentComponent implements OnInit {
       this.draftPanels[i] = this.allyDraftPanels[i];
       this.draftPanels[i + 5] = this.enemyDraftPanels[i];
     }
+
+    this.winRatePanel = new WinRatePanel();
 
     this.allySuggestionPanels = [];
     this.allySuggestionPanels1 = [];
@@ -155,6 +177,8 @@ export class DraftComponentComponent implements OnInit {
           panel.percentage = ((winRate - 0.5) * 100).toFixed(2) + "%";
         }
       });
+
+      this.updateWinRate();
     }
     return false;
   }
@@ -169,24 +193,46 @@ export class DraftComponentComponent implements OnInit {
     this.enemyDraftPanels.forEach((panel: DraftPanel) => {
       panel.percentage = "\xa0";
     });
+
+    this.updateWinRate();
     return false;
   }
 
-  update(): void {
+  updateWinRate(): void {
+    // get hovered heroes
     let allyHeroes: Hero[] = [];
     this.allyDraftPanels.forEach((panel) => {
       if (panel.hero !== Hero.NONE) {
-        allyHeroes.push(panel.pickedHero);
+        allyHeroes.push(panel.hero);
       }
     });
     let enemyHeroes: Hero[] = [];
     this.enemyDraftPanels.forEach((panel) => {
       if (panel.hero !== Hero.NONE) {
-        enemyHeroes.push(panel.pickedHero);
+        enemyHeroes.push(panel.hero);
       }
     });
 
-    console.log(this.draft.evaluate(allyHeroes, enemyHeroes));
+    let winRate = this.draft.evaluate(allyHeroes, enemyHeroes)
+    this.winRatePanel.setWinRate(winRate);
+  }
+
+  update(): void {
+    this.updateWinRate();
+
+    // get picked heroes
+    let allyHeroes: Hero[] = [];
+    this.allyDraftPanels.forEach((panel) => {
+      if (panel.pickedHero !== Hero.NONE) {
+        allyHeroes.push(panel.pickedHero);
+      }
+    });
+    let enemyHeroes: Hero[] = [];
+    this.enemyDraftPanels.forEach((panel) => {
+      if (panel.pickedHero !== Hero.NONE) {
+        enemyHeroes.push(panel.pickedHero);
+      }
+    });
 
     this.draft.suggest(allyHeroes, enemyHeroes, this.nSuggestions).then((heroes: Hero[]) => {
       for (let i = 0; i < this.allySuggestionPanels.length; ++i) {

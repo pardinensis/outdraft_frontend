@@ -11,6 +11,10 @@
             <div class="draft-panel-desc" id="draft-panel-desc={{panel.id}}">{{panel.percentage}}</div>
         </div>
     </mat-card>
+ 
+    <mat-card class="winrate-panel">
+        <div class="winrate-panel-desc">{{winRatePanel.winRate}}</div>    
+    </mat-card>
 
     <mat-card class="draft-area">
         <div *ngFor="let panel of enemyDraftPanels" class="draft-panel">
